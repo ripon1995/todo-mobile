@@ -1,0 +1,59 @@
+name: flutter_basic
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  flutter: 
+    sdk: flutter
+  dio: ^4.0.6
+  logger: ^1.1.0
+  google_fonts: ^2.3.2
+  unicons: ^2.1.0
+  url_launcher: ^6.1.2
+  get_storage: ^2.0.3
+
+dev_dependencies: 
+  flutter_lints: 2.0.1
+  flutter_test: 
+    sdk: flutter
+  flutter_flavorizr: ^2.1.5
+
+
+flavorizr:
+  flavors:
+    dev:
+      app:
+        name: "dev"
+
+      android:
+        applicationId: "com.rootless.flutter_basic"
+
+      ios:
+        bundleId: "com.rootless.flutterBasic"
+
+    stg:
+      app:
+        name: "stg"
+
+      android:
+        applicationId: "com.rootless.flutter_basic"
+      ios:
+        bundleId: "com.rootless.flutterBasic"
+
+    prod:
+      app:
+        name: "prod"
+
+      android:
+        applicationId: "com.rootless.flutter_basic"
+      ios:
+        bundleId: "com.rootless.flutterBasic"
+
+flutter: 
+  uses-material-design: true
+
