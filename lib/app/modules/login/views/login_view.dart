@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/log.dart';
-
+import 'package:flutter_basic/app/modules/home/views/home_view.dart';
+import 'package:flutter_basic/app/modules/login/controllers/login_controller.dart';
+import 'package:flutter_basic/app/network/login.dart';
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
-
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +34,18 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
               obscureText: true,
-              decoration: InputDecoration(
+              controller: passwordController,
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
@@ -77,8 +82,15 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
-  void _loginButtonAction() {
-    Log.debug("Login button pressed");
+  void _loginButtonAction() async {
+    dynamic status = await controller.loginUser(
+      emailController.text,
+      passwordController.text,
+    );
+    if (status == true) {
+      Get.snackbar("Congratulation", "Login successful");
+      Get.offAll(const HomeView());
+    }
   }
 
   void _registerButtonAction() {
