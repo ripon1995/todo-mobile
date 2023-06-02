@@ -15,7 +15,7 @@ void main_app() {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       color: Colors.red,
-
+      debugShowCheckedModeBanner: false,
     ),
   );
 }
