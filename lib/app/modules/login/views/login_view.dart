@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/views/home_view.dart';
 import 'package:flutter_basic/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter_basic/app/network/login.dart';
+import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -15,8 +16,9 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Or Register'),
+        title: const Text('Login'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -89,11 +91,12 @@ class LoginView extends GetView<LoginController> {
     );
     if (status == true) {
       Get.snackbar("Congratulation", "Login successful");
-      Get.offAll(const HomeView());
+      Get.toNamed(Routes.HOME);
     }
   }
 
   void _registerButtonAction() {
     Log.debug("Registration button pressed");
+    Get.toNamed(Routes.REGISTRATION);
   }
 }
