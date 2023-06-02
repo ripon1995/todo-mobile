@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/log.dart';
-import 'package:flutter_basic/app/modules/home/views/home_view.dart';
 import 'package:flutter_basic/app/modules/login/controllers/login_controller.dart';
-import 'package:flutter_basic/app/network/login.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
