@@ -5,7 +5,7 @@ import 'package:flutter_basic/app/network/dio_provider.dart';
 Future<ProfileResponse?> getProfile(int userId) async {
   try {
     dynamic dioCall = DioProvider.dioClient
-        .get("https://todobackend-x6vk.onrender.com/user/$userId/");
+        .get("https://todobackendjune.onrender.com/user/$userId/");
 
     return await callApiWithErrorParser(dioCall).then((dynamic response) {
       return ProfileResponse.fromJson(response.data);
