@@ -154,6 +154,7 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   void _profileUpdateButtonOnPressedAction() {
+    controller.profileUpdateController.updateVariable();
     Get.toNamed(Routes.PROFILE_UPDATE);
   }
 }
