@@ -1,28 +1,4 @@
-class ProfileResponse {
-  Data? data;
-  int? status;
-
-  ProfileResponse({
-    this.data,
-    this.status,
-  });
-
-  ProfileResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['status'] = status;
-    return data;
-  }
-}
-
-class Data {
+class Profile {
   int? id;
   bool? isSuperuser;
   String? username;
@@ -31,7 +7,7 @@ class Data {
   List<String>? groups;
   List<String>? userPermissions;
 
-  Data({
+  Profile({
     this.id,
     this.isSuperuser,
     this.username,
@@ -41,7 +17,7 @@ class Data {
     this.userPermissions,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     isSuperuser = json['is_superuser'];
     username = json['username'];
