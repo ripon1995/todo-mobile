@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/pretty_dio_logger.dart';
 import 'package:flutter_basic/app/network/token_interceptor.dart';
+import 'package:flutter_basic/app/network/token_refresh_interceptor.dart';
 
 class DioProvider {
   // static final String baseUrl = dotenv.get('BASE_URL');
@@ -63,7 +64,7 @@ class DioProvider {
 
     if (shouldRetryOnError) {
       Log.debug("Refresh token expired");
-      // interceptorList.add(TokenRefreshInterceptor());
+      interceptorList.add(TokenRefreshInterceptor());
     }
 
     return interceptorList;
