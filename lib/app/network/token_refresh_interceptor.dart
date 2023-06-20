@@ -4,6 +4,7 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/dio_request_retrier.dart';
 import 'package:flutter_basic/app/network/error_handlers.dart';
 import 'package:flutter_basic/app/network/exceptions/base_exception.dart';
+import 'package:flutter_basic/app/network/refresh_todo_token.dart';
 
 class TokenRefreshInterceptor extends InterceptorsWrapper {
   @override
@@ -25,7 +26,7 @@ class TokenRefreshInterceptor extends InterceptorsWrapper {
         DioRequestRetrier(requestOptions: requestOptions);
 
     try {
-      // await refreshToDoToken();
+      await refreshToDoToken();
       var response = await requestRetrier.retry();
       if (response.statusCode != HttpStatus.ok) {
         throw handleError(response.data);
