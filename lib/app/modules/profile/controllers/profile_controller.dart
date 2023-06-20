@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController {
 
   RxString username = "".obs;
-  Rx<String> name = "".obs;
 
   @override
   void onInit() {
@@ -28,7 +27,6 @@ class ProfileController extends GetxController {
     if (profileResponse != null) {
       Log.debug(profileResponse.data!.username!);
       username.value = profileResponse.data!.username!;
-      name(profileResponse.data!.username!);
     }
   }
 }
