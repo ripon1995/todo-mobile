@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/profile_update/controllers/profile_update_controller.dart';
 
@@ -30,15 +31,28 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
               obscureText: true,
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Implement update functionality
-              },
-              child: const Text('Update'),
-            ),
+            Obx(
+              () => controller.enableLoader.isFalse
+                  ? ElevatedButton(
+                      onPressed: _updateButtonOnPressedAction,
+                      child: const Text('Update'),
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blue,
+                      ),
+                    ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  void _updateButtonOnPressedAction() async {
+    await controller.updateProfile();
+    Get.back();
+    ProfileController profileController = Get.find();
+    profileController.profile();
   }
 }
