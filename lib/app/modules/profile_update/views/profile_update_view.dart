@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/profile_update/controllers/profile_update_controller.dart';
@@ -34,7 +35,7 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
             Obx(
               () => controller.enableLoader.isFalse
                   ? ElevatedButton(
-                      onPressed: _updateButtonOnPressedAction,
+                      onPressed:()=> _updateButtonOnPressedAction(context),
                       child: const Text('Update'),
                     )
                   : const Center(
@@ -49,10 +50,15 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
     );
   }
 
-  void _updateButtonOnPressedAction() async {
-    await controller.updateProfile();
-    Get.back();
-    ProfileController profileController = Get.find();
-    profileController.profile();
+  void _updateButtonOnPressedAction(BuildContext context) async {
+    dynamic status = await controller.updateProfile();
+    if(status == true) {
+      ProfileController profileController = Get.find();
+      profileController.profile();
+      Future.delayed(const Duration(seconds:0),()=> Get.snackbar("Congratulations!", "Update successful",snackPosition: SnackPosition.BOTTOM)).whenComplete(()=> Navigator.of(context).pop());
+    }
+    else {
+      Future.delayed(const Duration(seconds:0),()=> Get.snackbar("Congratulations!", "Update successful")).whenComplete(()=> Navigator.of(context).pop());
+    }
   }
 }
