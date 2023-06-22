@@ -7,8 +7,7 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final PreferenceManager _preferenceManager = Get.find();
-  ProfileUpdateController profileUpdateController =
-      Get.put(ProfileUpdateController());
+  ProfileUpdateController profileUpdateController = Get.find();
 
   RxString username = "".obs;
 
