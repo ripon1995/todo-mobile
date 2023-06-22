@@ -35,7 +35,7 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
             Obx(
               () => controller.enableLoader.isFalse
                   ? ElevatedButton(
-                      onPressed:()=> _updateButtonOnPressedAction(context),
+                      onPressed: () => _updateButtonOnPressedAction(context),
                       child: const Text('Update'),
                     )
                   : const Center(
@@ -52,13 +52,18 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
 
   void _updateButtonOnPressedAction(BuildContext context) async {
     dynamic status = await controller.updateProfile();
-    if(status == true) {
+    if (status == true) {
       ProfileController profileController = Get.find();
       profileController.profile();
-      Future.delayed(const Duration(seconds:0),()=> Get.snackbar("Congratulations!", "Update successful",snackPosition: SnackPosition.BOTTOM)).whenComplete(()=> Navigator.of(context).pop());
-    }
-    else {
-      Future.delayed(const Duration(seconds:0),()=> Get.snackbar("Congratulations!", "Update successful")).whenComplete(()=> Navigator.of(context).pop());
+      Future.delayed(
+              const Duration(seconds: 0),
+              () => Get.snackbar("Congratulations!", "Update successful",
+                  snackPosition: SnackPosition.BOTTOM))
+          .whenComplete(() => Navigator.of(context).pop());
+    } else {
+      Future.delayed(const Duration(seconds: 0),
+              () => Get.snackbar("Congratulations!", "Update successful"))
+          .whenComplete(() => Navigator.of(context).pop());
     }
   }
 }
