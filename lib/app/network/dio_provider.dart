@@ -63,7 +63,7 @@ class DioProvider {
     interceptorList.add(TokenInterceptor());
 
     if (shouldRetryOnError) {
-      Log.debug("Refresh token expired");
+      Log.debug("Access token expired");
       interceptorList.add(TokenRefreshInterceptor());
     }
 
