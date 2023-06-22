@@ -9,18 +9,18 @@ Future<RefreshResponse?> refreshToDoToken() async {
   PreferenceManager preferenceManager = Get.find();
 
   try {
-    dynamic dioCall = DioProvider.dioClient;
-
-    dioCall.post(
+    dynamic dioCall = DioProvider.dioClient.post(
       "https://todobackendjune.onrender.com/token/refresh/",
       data: requestBody(
           preferenceManager.getString(PreferenceManager.refreshToken)),
     );
 
     return await callApiWithErrorParser(dioCall).then((dynamic response) {
-      preferenceManager.setString(PreferenceManager.accessToken, response.data);
-      Log.debug("Access token : ${preferenceManager.getString(PreferenceManager.accessToken)}");
-      return RefreshResponse.fromJson(response.data);
+      preferenceManager.setString(
+          PreferenceManager.accessToken, response.data['access']);
+      Log.debug(
+          "Access token : ${preferenceManager.getString(PreferenceManager.accessToken)}");
+      return RefreshResponse.fromJson(response.data['access']);
     });
   } catch (exception) {
     rethrow;

@@ -29,7 +29,7 @@ class TokenRefreshInterceptor extends InterceptorsWrapper {
       await refreshToDoToken();
       var response = await requestRetrier.retry();
       if (response.statusCode != HttpStatus.ok) {
-        throw handleError(response.data);
+        throw handleError(response.data['access']);
       }
 
       return response;
