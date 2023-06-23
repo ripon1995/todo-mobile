@@ -12,6 +12,7 @@ abstract class PreferenceManager {
   static const String userDetailId = "userDetailId";
   static const String profilePictureLink = "profilePictureLink";
   static const String profileDetailsCreated = "profileDetailsCreated";
+  static const String isLoggedIn = "isLoggedIn";
 
   String getString(String key, {String defaultValue = ""});
 

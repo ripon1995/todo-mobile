@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/pretty_dio_logger.dart';
+import 'package:flutter_basic/app/network/custom_token_interceptor.dart';
 import 'package:flutter_basic/app/network/token_interceptor.dart';
 import 'package:flutter_basic/app/network/token_refresh_interceptor.dart';
 
@@ -22,6 +23,7 @@ class DioProvider {
     _instance ??= Dio(_options);
 
     _instance!.interceptors.clear();
+    _instance!.interceptors.add(_prettyDioLogger);
 
     return _instance!;
   }
@@ -63,7 +65,6 @@ class DioProvider {
     interceptorList.add(TokenInterceptor());
 
     if (shouldRetryOnError) {
-      Log.debug("Access token expired");
       interceptorList.add(TokenRefreshInterceptor());
     }
 
@@ -75,6 +76,26 @@ class DioProvider {
     if (kDebugMode) {
       interceptorList.add(_prettyDioLogger);
     }
+
+    return interceptorList;
+  }
+
+  static Dio get dioClientWithRefreshToken {
+    _instance ??= plainDio;
+
+    _instance!.interceptors.clear();
+
+    _instance!.interceptors.addAll(_getLoggingInterceptors());
+    _instance!.interceptors.addAll(_getRefreshTokenInterceptors());
+
+    // _instance!.interceptors.add(_prettyDioLogger);
+
+    return _instance!;
+  }
+
+  static List<Interceptor> _getRefreshTokenInterceptors() {
+    List<Interceptor> interceptorList = [];
+    interceptorList.add(CustomTokenInterceptor());
 
     return interceptorList;
   }
