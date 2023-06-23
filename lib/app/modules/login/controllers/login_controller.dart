@@ -38,5 +38,15 @@ class LoginController extends GetxController {
         PreferenceManager.accessToken, loginResponse!.accessToken!);
     _preferenceManager.setString(
         PreferenceManager.refreshToken, loginResponse.refreshToken!);
+    _preferenceManager.setBool(PreferenceManager.isLoggedIn, true);
+  }
+
+  void clearSessionInfo() {
+    _clearSharedPreferenceValue();
+  }
+
+  void _clearSharedPreferenceValue() {
+    _preferenceManager.remove(PreferenceManager.refreshToken);
+    _preferenceManager.remove(PreferenceManager.accessToken);
   }
 }
