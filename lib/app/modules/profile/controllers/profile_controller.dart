@@ -16,6 +16,7 @@ class ProfileController extends GetxController {
   RxInt completedPercentage = 0.obs;
   RxInt inCompletedTotal = 0.obs;
   RxInt inCompletedPercentage = 0.obs;
+  RxList<Task> rxTaskList = RxList<Task>.empty(growable: true);
 
   @override
   void onInit() {
@@ -43,6 +44,7 @@ class ProfileController extends GetxController {
 
   void getToDoList() async {
     List<Task> taskList = await getUserToDoList(_getUserIdFromPreference());
+    rxTaskList.addAll(taskList);
     _countCompletedAndInCompletedToDos(taskList);
   }
 

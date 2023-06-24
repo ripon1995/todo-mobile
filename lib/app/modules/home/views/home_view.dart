@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_basic/app/data/models/task.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_basic/app/modules/home/widgets/bottom_sheet_home.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+
+import '../widgets/todo_item_card.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF0F0F0),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _floatingButtonAction(context),
         backgroundColor: Colors.black,
@@ -25,10 +30,18 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [_profileIcon()],
       ),
-      body: const Center(
-        child: Text(
-          '',
-          style: TextStyle(fontSize: 20),
+      body: SizedBox(
+        height: 120,
+        child: Obx(
+          () => ListView(
+            scrollDirection: Axis.horizontal,
+            children: List.generate(
+              controller.profileController.rxTaskList.length,
+              (index) => listItem(
+                controller.profileController.rxTaskList[index],
+              ),
+            ),
+          ),
         ),
       ),
     );
