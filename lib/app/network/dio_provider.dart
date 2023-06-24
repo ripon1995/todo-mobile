@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/pretty_dio_logger.dart';
-// import 'package:flutter_basic/app/network/token_interceptor.dart';
+import 'package:flutter_basic/app/network/custom_token_interceptor.dart';
+import 'package:flutter_basic/app/network/token_interceptor.dart';
+import 'package:flutter_basic/app/network/token_refresh_interceptor.dart';
 
 class DioProvider {
   // static final String baseUrl = dotenv.get('BASE_URL');
@@ -20,6 +23,7 @@ class DioProvider {
     _instance ??= Dio(_options);
 
     _instance!.interceptors.clear();
+    _instance!.interceptors.add(_prettyDioLogger);
 
     return _instance!;
   }
@@ -58,11 +62,11 @@ class DioProvider {
 
   static List<Interceptor> _getTokenInterceptors(bool shouldRetryOnError) {
     List<Interceptor> interceptorList = [];
-    // interceptorList.add(TokenInterceptor());
+    interceptorList.add(TokenInterceptor());
 
-    // if (shouldRetryOnError) {
-    //   interceptorList.add(TokenRefreshInterceptor());
-    // }
+    if (shouldRetryOnError) {
+      interceptorList.add(TokenRefreshInterceptor());
+    }
 
     return interceptorList;
   }
@@ -72,6 +76,26 @@ class DioProvider {
     if (kDebugMode) {
       interceptorList.add(_prettyDioLogger);
     }
+
+    return interceptorList;
+  }
+
+  static Dio get dioClientWithRefreshToken {
+    _instance ??= plainDio;
+
+    _instance!.interceptors.clear();
+
+    _instance!.interceptors.addAll(_getLoggingInterceptors());
+    _instance!.interceptors.addAll(_getRefreshTokenInterceptors());
+
+    // _instance!.interceptors.add(_prettyDioLogger);
+
+    return _instance!;
+  }
+
+  static List<Interceptor> _getRefreshTokenInterceptors() {
+    List<Interceptor> interceptorList = [];
+    interceptorList.add(CustomTokenInterceptor());
 
     return interceptorList;
   }

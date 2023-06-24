@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/app/bindings/initial_binding.dart';
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
 import 'package:flutter_basic/app/data/local/preference/preference_manager_impl.dart';
 import 'package:get/get.dart';
@@ -12,10 +13,11 @@ void main_app() {
   runApp(
     GetMaterialApp(
       title: "Application",
+      initialBinding: InitialBinding(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       color: Colors.red,
-
+      debugShowCheckedModeBanner: false,
     ),
   );
 }

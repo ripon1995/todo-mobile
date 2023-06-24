@@ -1,12 +1,12 @@
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
 import 'package:flutter_basic/app/data/remote/login_response.dart';
-import 'package:flutter_basic/app/log.dart';
-import 'package:flutter_basic/app/modules/home/views/home_view.dart';
+import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/login.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final PreferenceManager _preferenceManager = Get.find();
+  final ProfileController _profileController = Get.find();
 
   @override
   void onInit() {
@@ -27,6 +27,7 @@ class LoginController extends GetxController {
     LoginResponse? loginResponse = await login(email, password);
     if (loginResponse != null) {
       _setLoginDataInPreferenceManager(loginResponse);
+      _profileController.profile();
       return true;
     }
     return false;
@@ -37,5 +38,15 @@ class LoginController extends GetxController {
         PreferenceManager.accessToken, loginResponse!.accessToken!);
     _preferenceManager.setString(
         PreferenceManager.refreshToken, loginResponse.refreshToken!);
+    _preferenceManager.setBool(PreferenceManager.isLoggedIn, true);
+  }
+
+  void clearSessionInfo() {
+    _clearSharedPreferenceValue();
+  }
+
+  void _clearSharedPreferenceValue() {
+    _preferenceManager.remove(PreferenceManager.refreshToken);
+    _preferenceManager.remove(PreferenceManager.accessToken);
   }
 }
