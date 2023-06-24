@@ -93,58 +93,65 @@ class ProfileView extends GetView<ProfileController> {
       children: [
         Expanded(
           flex: 1,
-          child: Container(
-            color: Colors.red,
-            height: 150,
-            padding: const EdgeInsets.all(16),
-            child: Obx(() => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Completed",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Total : ${controller.completedTotal.value.toString()}',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
+          child: Card(
+            elevation: 8,
+            child: Container(
+              color: Colors.white10,
+              height: 150,
+              padding: const EdgeInsets.all(16),
+              child: Obx(() => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Completed",
+                        style:
+                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    const Text(
-                      'Percentage : ',
-                      style: textStyle,
-                    ),
-                  ],
-                )),
+                      Text(
+                        'Total : ${controller.completedTotal.value.toString()}',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const Text(
+                        'Percentage : ',
+                        style: textStyle,
+                      ),
+                    ],
+                  )),
+            ),
           ),
         ),
         Expanded(
           flex: 1,
-          child: Container(
-            color: Colors.amber,
-            height: 150,
-            padding: const EdgeInsets.all(16),
-            child: Obx(() => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Incompleted",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Total : ${controller.inCompletedTotal.value.toString()}',
-                  style: textStyle,
-                ),
-                const Text(
-                  'Percentage : ',
-                  style: textStyle,
-                ),
-              ],
-            )),
+          child: Card(
+            elevation: 8,
+            child: Container(
+              color: Colors.white10,
+              height: 150,
+              padding: const EdgeInsets.all(16),
+              child: Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Incompleted",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Total : ${controller.inCompletedTotal.value.toString()}',
+                    style: textStyle,
+                  ),
+                  const Text(
+                    'Percentage : ',
+                    style: textStyle,
+                  ),
+                ],
+              )),
+            ),
           ),
         ),
+
       ],
     );
   }
