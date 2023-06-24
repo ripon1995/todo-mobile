@@ -90,6 +90,5 @@ void showBottomSheetContent(BuildContext context, HomeController controller) {
 
 void _createButtonAction(HomeController controller, BuildContext context) {
   controller.createToDo();
-  Log.debug(controller.createTaskIsCompleted.value.toString());
   Navigator.pop(context);
 }

@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/data/local/preference/preference_manager.dart'
 import 'package:flutter_basic/app/data/models/task.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/create_to_do.dart';
+import 'package:flutter_basic/app/network/get_user_to_to_list.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -13,6 +14,7 @@ class HomeController extends GetxController {
       TextEditingController();
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
+  RxList<Task> rxTaskList = RxList<Task>.empty(growable: true);
 
   @override
   void onInit() {
@@ -44,5 +46,17 @@ class HomeController extends GetxController {
       Get.snackbar("Oops!", "Could not added new task",
           snackPosition: SnackPosition.BOTTOM);
     }
+    getToDoList();
+  }
+
+  void getToDoList() async {
+    List<Task> taskList = await getUserToDoList(_getUserIdFromPreference());
+    rxTaskList.clear();
+    rxTaskList.addAll(taskList);
+    profileController.countCompletedAndInCompletedToDos(taskList);
+  }
+
+  int _getUserIdFromPreference() {
+    return _preferenceManager.getInt(PreferenceManager.userId);
   }
 }

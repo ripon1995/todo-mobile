@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_basic/app/data/models/task.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_basic/app/modules/home/widgets/bottom_sheet_home.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-
-import '../widgets/todo_item_card.dart';
+import 'package:flutter_basic/app/modules/home/widgets/todo_item_card.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -36,9 +33,9 @@ class HomeView extends GetView<HomeController> {
           () => ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(
-              controller.profileController.rxTaskList.length,
+              controller.rxTaskList.length,
               (index) => listItem(
-                controller.profileController.rxTaskList[index],
+                controller.rxTaskList[index],
               ),
             ),
           ),
@@ -49,7 +46,6 @@ class HomeView extends GetView<HomeController> {
 
   void _profileButtonAction() {
     controller.profileController.profile();
-    controller.profileController.getToDoList();
     Get.toNamed(Routes.PROFILE);
   }
 
