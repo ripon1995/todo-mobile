@@ -13,9 +13,7 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('HomeView'),
         centerTitle: true,
-        actions: [
-          _profileIcon()
-        ],
+        actions: [_profileIcon()],
       ),
       body: const Center(
         child: Text(
@@ -28,8 +26,10 @@ class HomeView extends GetView<HomeController> {
 
   void _profileButtonAction() {
     controller.profileController.profile();
+    controller.profileController.getToDoList();
     Get.toNamed(Routes.PROFILE);
   }
+
   Widget _profileIcon() {
     return Container(
       margin: const EdgeInsets.only(right: 10),
