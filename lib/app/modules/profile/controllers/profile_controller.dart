@@ -12,6 +12,10 @@ class ProfileController extends GetxController {
   ProfileUpdateController profileUpdateController = Get.find();
 
   RxString username = "".obs;
+  RxInt completedTotal = 0.obs;
+  RxInt completedPercentage = 0.obs;
+  RxInt inCompletedTotal = 0.obs;
+  RxInt inCompletedPercentage = 0.obs;
 
   @override
   void onInit() {
@@ -39,6 +43,7 @@ class ProfileController extends GetxController {
 
   void getToDoList() async {
     List<Task> taskList = await getUserToDoList(_getUserIdFromPreference());
+    _countCompletedAndInCompletedToDos(taskList);
   }
 
   void _setProfileInfoInPreferenceManager(dynamic profile) {
@@ -50,5 +55,16 @@ class ProfileController extends GetxController {
 
   int _getUserIdFromPreference() {
     return _preferenceManager.getInt(PreferenceManager.userId);
+  }
+
+  void _countCompletedAndInCompletedToDos(List<Task> taskList) {
+    int completed = 0;
+    for (int i = 0; i < taskList.length; i++) {
+      if (taskList[i].completed == true) {
+        completed++;
+      }
+    }
+    completedTotal.value = completed;
+    inCompletedTotal.value = taskList.length - completed;
   }
 }

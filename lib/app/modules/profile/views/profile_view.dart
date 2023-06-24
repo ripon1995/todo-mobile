@@ -97,27 +97,27 @@ class ProfileView extends GetView<ProfileController> {
             color: Colors.red,
             height: 150,
             padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Completed",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Total : ',
-                  style: TextStyle(color: Colors.black, fontSize: 16),
-                ),
-                Text(
-                  'Percentage : ',
-                  style: textStyle,
-                ),
-                Text(
-                  'Text 3',
-                  style: textStyle,
-                ),
-              ],
-            ),
+            child: Obx(() => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Completed",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Total : ${controller.completedTotal.value.toString()}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Text(
+                      'Percentage : ',
+                      style: textStyle,
+                    ),
+                  ],
+                )),
           ),
         ),
         Expanded(
@@ -125,28 +125,24 @@ class ProfileView extends GetView<ProfileController> {
           child: Container(
             color: Colors.amber,
             height: 150,
-            padding: EdgeInsets.all(16),
-            child: Column(
+            padding: const EdgeInsets.all(16),
+            child: Obx(() => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Incompleted",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Total : ',
+                  'Total : ${controller.inCompletedTotal.value.toString()}',
                   style: textStyle,
                 ),
-                Text(
+                const Text(
                   'Percentage : ',
                   style: textStyle,
                 ),
-                Text(
-                  'Text 6',
-                  style: textStyle,
-                ),
               ],
-            ),
+            )),
           ),
         ),
       ],
