@@ -1,11 +1,21 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
+import 'package:flutter_basic/app/data/models/task.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/network/create_to_do.dart';
+import 'package:flutter_basic/app/network/get_user_to_to_list.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final PreferenceManager _preferenceManager = Get.find();
+  ProfileController profileController = Get.find();
+  TextEditingController createTaskTitleController = TextEditingController();
+  TextEditingController createTaskDescriptionController =
+      TextEditingController();
+  TextEditingController createTaskStatusController = TextEditingController();
+  RxBool createTaskIsCompleted = false.obs;
+  RxList<Task> rxTaskList = RxList<Task>.empty(growable: true);
 
-  ProfileController profileController = Get.put(ProfileController());
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -21,5 +31,32 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void createToDo() async {
+    Task? task = await createToDoItem(
+      _preferenceManager.getInt(PreferenceManager.userId),
+      createTaskTitleController.text,
+      createTaskDescriptionController.text,
+      createTaskStatusController.text,
+      createTaskIsCompleted.value,
+    );
+    if (task != null) {
+      Get.snackbar("Congratulations!", "New task added successfully!",
+          snackPosition: SnackPosition.BOTTOM);
+    } else {
+      Get.snackbar("Oops!", "Could not added new task",
+          snackPosition: SnackPosition.BOTTOM);
+    }
+    getToDoList();
+  }
+
+  void getToDoList() async {
+    List<Task> taskList = await getUserToDoList(_getUserIdFromPreference());
+    rxTaskList.clear();
+    rxTaskList.addAll(taskList);
+    profileController.countCompletedAndInCompletedToDos(taskList);
+  }
+
+  int _getUserIdFromPreference() {
+    return _preferenceManager.getInt(PreferenceManager.userId);
+  }
 }

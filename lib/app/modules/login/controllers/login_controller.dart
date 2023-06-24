@@ -1,5 +1,6 @@
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
 import 'package:flutter_basic/app/data/remote/login_response.dart';
+import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/login.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final PreferenceManager _preferenceManager = Get.find();
   final ProfileController _profileController = Get.find();
+  final HomeController _homeController = Get.find();
 
   @override
   void onInit() {
@@ -28,6 +30,7 @@ class LoginController extends GetxController {
     if (loginResponse != null) {
       _setLoginDataInPreferenceManager(loginResponse);
       _profileController.profile();
+      _homeController.getToDoList();
       return true;
     }
     return false;
