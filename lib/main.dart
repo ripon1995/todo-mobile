@@ -14,7 +14,7 @@ void main_app() {
     GetMaterialApp(
       title: "Application",
       initialBinding: InitialBinding(),
-      initialRoute: AppPages.INITIAL,
+      initialRoute: Routes.HOME,
       getPages: AppPages.routes,
       color: Colors.red,
       debugShowCheckedModeBanner: false,

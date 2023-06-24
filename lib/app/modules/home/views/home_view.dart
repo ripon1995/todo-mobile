@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
-import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/modules/home/widgets/bottom_sheet_home.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +10,16 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _floatingButtonAction(context),
+        backgroundColor: Colors.black,
+        splashColor: Colors.green,
+        child: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       appBar: AppBar(
         title: const Text('HomeView'),
         centerTitle: true,
@@ -28,6 +38,10 @@ class HomeView extends GetView<HomeController> {
     controller.profileController.profile();
     controller.profileController.getToDoList();
     Get.toNamed(Routes.PROFILE);
+  }
+
+  void _floatingButtonAction(BuildContext context) {
+    showBottomSheetContent(context, controller);
   }
 
   Widget _profileIcon() {
