@@ -39,28 +39,31 @@ void showBottomSheetContent(BuildContext context, HomeController controller) {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              "Status",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            TextField(
+              controller: controller.createTaskStatusController,
+              decoration: const InputDecoration(
+                labelText: "Status",
+              ),
             ),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Obx(() => Radio<bool>(
-                  value: true,
-                  groupValue: controller.createTaskStatus.value,
-                  onChanged: (bool? value) {
-                    controller.createTaskStatus.value = value!;
-                  },
-                )),
+                      value: true,
+                      groupValue: controller.createTaskIsCompleted.value,
+                      onChanged: (bool? value) {
+                        controller.createTaskIsCompleted.value = value!;
+                      },
+                    )),
                 const Text("Completed"),
                 const SizedBox(width: 16),
                 Obx(() => Radio<bool>(
-                  value: false,
-                  groupValue: controller.createTaskStatus.value,
-                  onChanged: (bool? value) {
-                    controller.createTaskStatus.value = value!;
-                  },
-                )),
+                      value: false,
+                      groupValue: controller.createTaskIsCompleted.value,
+                      onChanged: (bool? value) {
+                        controller.createTaskIsCompleted.value = value!;
+                      },
+                    )),
                 const Text("Incompleted"),
               ],
             ),
@@ -68,10 +71,7 @@ void showBottomSheetContent(BuildContext context, HomeController controller) {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Log.debug(controller.createTaskStatus.value.toString());
-                  Navigator.pop(context);
-                },
+                onPressed: () => _createButtonAction(controller, context),
                 child: const Text(
                   "Create",
                   style: TextStyle(
@@ -86,4 +86,10 @@ void showBottomSheetContent(BuildContext context, HomeController controller) {
       );
     },
   );
+}
+
+void _createButtonAction(HomeController controller, BuildContext context) {
+  controller.createToDo();
+  Log.debug(controller.createTaskIsCompleted.value.toString());
+  Navigator.pop(context);
 }
