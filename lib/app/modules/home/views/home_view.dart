@@ -31,11 +31,12 @@ class HomeView extends GetView<HomeController> {
         height: 120,
         child: Obx(
           () => ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: List.generate(
               controller.rxTaskList.length,
               (index) => listItem(
-                controller.rxTaskList[index],
+                controller.rxTaskList[index],controller,index
               ),
             ),
           ),

@@ -15,6 +15,13 @@ class HomeController extends GetxController {
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
   RxList<Task> rxTaskList = RxList<Task>.empty(growable: true);
+  RxBool isOnTapped = false.obs;
+  RxList<int> colors = RxList<int>.generate(12, (_) => 0);
+
+  void resetColors() {
+    colors.replaceRange(
+        0, colors.length, List.generate(colors.length, (index) => 0));
+  }
 
   @override
   void onInit() {
