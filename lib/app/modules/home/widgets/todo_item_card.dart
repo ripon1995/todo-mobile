@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/data/models/task.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_basic/app/modules/home/widgets/update_todo_bottom_sheet.dart';
 
-Widget listItem(Task task, HomeController controller, int index) {
+Widget listItem(
+    BuildContext context, Task task, HomeController controller, int index) {
   return GestureDetector(
     onTap: () {
       controller.resetColors();
       controller.colors[index] == 0
           ? controller.colors[index] = 1
           : controller.colors[index] = 0;
+      controller.setTextEditingControllerToUpdateToDoData(task);
+      _listItemOnTapAction(context, task, controller);
     },
     child: AnimatedContainer(
       decoration: BoxDecoration(
@@ -41,4 +45,9 @@ Widget listItem(Task task, HomeController controller, int index) {
       ),
     ),
   );
+}
+
+void _listItemOnTapAction(
+    BuildContext context, Task task, HomeController controller) {
+  updateToBottomSheetContent(context, controller, task.id!);
 }
