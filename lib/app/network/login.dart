@@ -1,11 +1,12 @@
 import 'package:flutter_basic/app/data/remote/login_response.dart';
 import 'package:flutter_basic/app/network/api_call.dart';
 import 'package:flutter_basic/app/network/dio_provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<LoginResponse?> login(String email, String password) async{
   try {
     dynamic dioCall = DioProvider.plainDio.post(
-      "https://todobackendjune.onrender.com/token/",
+      "${dotenv.get("BASE_URL")}/token/",
       data: requestBody(email, password),
     );
 
