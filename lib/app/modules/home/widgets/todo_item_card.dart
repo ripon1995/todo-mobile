@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/data/models/task.dart';
+import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_basic/app/modules/home/widgets/delete_todo_bottom_sheet_content.dart';
 import 'package:flutter_basic/app/modules/home/widgets/update_todo_bottom_sheet.dart';
 
 Widget listItem(
     BuildContext context, Task task, HomeController controller, int index) {
+
+  controller.resetColors();
+
   return GestureDetector(
     onTap: () {
       controller.resetColors();
@@ -13,6 +18,10 @@ Widget listItem(
           : controller.colors[index] = 0;
       controller.setTextEditingControllerToUpdateToDoData(task);
       _listItemOnTapAction(context, task, controller);
+    },
+    onLongPress: () {
+      controller.setTextEditingControllerToUpdateToDoData(task);
+      _listItemOnLongPressedAction(context, controller, task.id!);
     },
     child: AnimatedContainer(
       decoration: BoxDecoration(
@@ -50,4 +59,8 @@ Widget listItem(
 void _listItemOnTapAction(
     BuildContext context, Task task, HomeController controller) {
   updateToBottomSheetContent(context, controller, task.id!);
+}
+
+void _listItemOnLongPressedAction(BuildContext context, HomeController controller, int taskId) {
+  deleteToDoBottomSheetContent(context, controller, taskId);
 }
