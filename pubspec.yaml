@@ -2,13 +2,13 @@ name: flutter_basic
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
-environment: 
+environment:
   sdk: '>=2.18.4 <3.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.5
-  flutter: 
+  flutter:
     sdk: flutter
   dio: ^4.0.6
   logger: ^1.1.0
@@ -16,10 +16,11 @@ dependencies:
   unicons: ^2.1.0
   url_launcher: ^6.1.2
   get_storage: ^2.0.3
+  flutter_dotenv: ^5.1.0
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: 2.0.1
-  flutter_test: 
+  flutter_test:
     sdk: flutter
   flutter_flavorizr: ^2.1.5
 
@@ -54,6 +55,8 @@ flavorizr:
       ios:
         bundleId: "com.rootless.flutterBasic"
 
-flutter: 
+flutter:
   uses-material-design: true
+  assets:
+    - assets/.env
 

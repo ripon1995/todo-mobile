@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter_basic/app/network/dio_provider.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 Future<void> refreshToDoToken() async {
@@ -11,7 +12,7 @@ Future<void> refreshToDoToken() async {
 
   try {
     dynamic dioCall = await DioProvider.dioClientWithRefreshToken
-        .post("https://todobackendjune.onrender.com/token/refresh/",
+        .post("${dotenv.get("BASE_URL")}/token/refresh/",
             data: requestBody(
               preferenceManager.getString(PreferenceManager.refreshToken),
             ));
