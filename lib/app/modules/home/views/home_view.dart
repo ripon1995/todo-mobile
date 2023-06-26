@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
-import 'package:flutter_basic/app/modules/home/widgets/bottom_sheet_home.dart';
+import 'package:flutter_basic/app/modules/home/widgets/create_todo_bottom_sheet_home.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/home/widgets/todo_item_card.dart';
@@ -31,11 +31,15 @@ class HomeView extends GetView<HomeController> {
         height: 120,
         child: Obx(
           () => ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: List.generate(
               controller.rxTaskList.length,
               (index) => listItem(
+                context,
                 controller.rxTaskList[index],
+                controller,
+                index,
               ),
             ),
           ),
@@ -50,7 +54,7 @@ class HomeView extends GetView<HomeController> {
   }
 
   void _floatingButtonAction(BuildContext context) {
-    showBottomSheetContent(context, controller);
+    createToBottomSheetContent(context, controller);
   }
 
   Widget _profileIcon() {

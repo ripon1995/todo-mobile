@@ -3,7 +3,7 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
-void showBottomSheetContent(BuildContext context, HomeController controller) {
+void createToBottomSheetContent(BuildContext context, HomeController controller) {
   showModalBottomSheet(
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
