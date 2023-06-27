@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/modules/profile/widgets/logout_button.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +36,7 @@ class ProfileView extends GetView<ProfileController> {
               const SizedBox(
                 height: 20,
               ),
+              LogoutButton()
             ],
           ),
         ));
@@ -104,8 +106,8 @@ class ProfileView extends GetView<ProfileController> {
                     children: [
                       const Text(
                         "Completed",
-                        style:
-                            TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         'Total : ${controller.completedTotal.value.toString()}',
@@ -132,26 +134,26 @@ class ProfileView extends GetView<ProfileController> {
               height: 150,
               padding: const EdgeInsets.all(16),
               child: Obx(() => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Incompleted",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'Total : ${controller.inCompletedTotal.value.toString()}',
-                    style: textStyle,
-                  ),
-                  const Text(
-                    'Percentage : ',
-                    style: textStyle,
-                  ),
-                ],
-              )),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Incompleted",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Total : ${controller.inCompletedTotal.value.toString()}',
+                        style: textStyle,
+                      ),
+                      const Text(
+                        'Percentage : ',
+                        style: textStyle,
+                      ),
+                    ],
+                  )),
             ),
           ),
         ),
-
       ],
     );
   }

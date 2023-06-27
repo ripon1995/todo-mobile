@@ -7,7 +7,8 @@ import 'app/routes/app_pages.dart';
 
 late PreferenceManager _preferenceManager;
 
-void main_app() {
+void main_app() async {
+  WidgetsFlutterBinding.ensureInitialized();
   _preferenceManager = Get.put(PreferenceManagerImpl());
 
   runApp(
