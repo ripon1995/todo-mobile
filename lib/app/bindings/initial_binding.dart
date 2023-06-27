@@ -11,10 +11,10 @@ class InitialBinding implements Bindings {
   @override
   void dependencies() {
     Get.put<PreferenceManager>(PreferenceManagerImpl());
-    Get.lazyPut(() => HomeController());
+    Get.lazyPut(() => HomeController(), fenix: true);
+    Get.lazyPut(() => ProfileUpdateController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => LoginController());
     Get.lazyPut(() => RegistrationController());
-    Get.lazyPut(() => ProfileController());
-    Get.lazyPut(() => ProfileUpdateController());
   }
 }

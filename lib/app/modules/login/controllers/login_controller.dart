@@ -51,5 +51,6 @@ class LoginController extends GetxController {
   void _clearSharedPreferenceValue() {
     _preferenceManager.remove(PreferenceManager.refreshToken);
     _preferenceManager.remove(PreferenceManager.accessToken);
+    _preferenceManager.clear();
   }
 }
