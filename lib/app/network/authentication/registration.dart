@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<RegistrationResponse?> register(
     String username, String email, String password) async {
   try {
-    dynamic dioCall = DioProvider.dioClient.post(
+    dynamic dioCall = DioProvider.plainDio.post(
       "${dotenv.get("BASE_URL")}/user/",
       data: requestBody(username, email, password),
     );

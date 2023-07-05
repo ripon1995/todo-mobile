@@ -1,9 +1,9 @@
-import 'package:flutter_basic/app/data/models/task.dart';
+import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/network/api_call.dart';
 import 'package:flutter_basic/app/network/dio_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-Future<Task?> updateToDoItem(int todoId, String title, String description,
+Future<ToDo?> updateToDoItem(int todoId, String title, String description,
     String status, bool completed) async {
   try {
     dynamic dioCall = DioProvider.plainDio.put(
@@ -12,7 +12,7 @@ Future<Task?> updateToDoItem(int todoId, String title, String description,
     );
 
     return await callApiWithErrorParser(dioCall).then((dynamic response) {
-      return Task.fromJson(response.data);
+      return ToDo.fromJson(response.data);
     });
   } catch (exception) {
     rethrow;

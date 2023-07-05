@@ -1,9 +1,9 @@
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
-import 'package:flutter_basic/app/data/models/task.dart';
-import 'package:flutter_basic/app/data/remote/profile.dart';
+import 'package:flutter_basic/app/data/models/todo.dart';
+import 'package:flutter_basic/app/data/models/profile.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile_update/controllers/profile_update_controller.dart';
-import 'package:flutter_basic/app/network/get_profile.dart';
+import 'package:flutter_basic/app/network/profile/get_profile.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -34,9 +34,9 @@ class ProfileController extends GetxController {
   void profile() async {
     Profile? profile = await getProfile();
     if (profile != null) {
-      Log.debug(profile.username!);
       username.value = profile.username!;
       _setProfileInfoInPreferenceManager(profile);
+      Log.debug(profile.username!);
     }
   }
 
@@ -47,7 +47,7 @@ class ProfileController extends GetxController {
     _preferenceManager.setString(PreferenceManager.password, profile!.password);
   }
 
-  void countCompletedAndInCompletedToDos(List<Task> taskList) {
+  void countCompletedAndInCompletedToDos(List<ToDo> taskList) {
     int completed = 0;
     for (int i = 0; i < taskList.length; i++) {
       if (taskList[i].completed == true) {

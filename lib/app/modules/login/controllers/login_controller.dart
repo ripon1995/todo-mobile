@@ -2,7 +2,7 @@ import 'package:flutter_basic/app/data/local/preference/preference_manager.dart'
 import 'package:flutter_basic/app/data/remote/login_response.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_basic/app/network/login.dart';
+import 'package:flutter_basic/app/network/authentication/login.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {

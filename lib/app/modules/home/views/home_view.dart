@@ -34,10 +34,10 @@ class HomeView extends GetView<HomeController> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: List.generate(
-              controller.rxTaskList.length,
+              controller.rxToDoList.length,
               (index) => listItem(
                 context,
-                controller.rxTaskList[index],
+                controller.rxToDoList[index],
                 controller,
                 index,
               ),
