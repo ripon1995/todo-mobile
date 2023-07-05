@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic/app/data/models/task.dart';
+import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter_basic/app/modules/home/widgets/delete_todo_bottom_sheet_content.dart';
 import 'package:flutter_basic/app/modules/home/widgets/update_todo_bottom_sheet.dart';
 
 Widget listItem(
-    BuildContext context, Task task, HomeController controller, int index) {
+    BuildContext context, ToDo task, HomeController controller, int index) {
 
   controller.resetColors();
 
@@ -57,7 +57,7 @@ Widget listItem(
 }
 
 void _listItemOnTapAction(
-    BuildContext context, Task task, HomeController controller) {
+    BuildContext context, ToDo task, HomeController controller) {
   updateToBottomSheetContent(context, controller, task.id!);
 }
 

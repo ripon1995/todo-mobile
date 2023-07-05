@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
-import 'package:flutter_basic/app/data/models/task.dart';
+import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/data/remote/to_do_delete_response.dart';
+import 'package:flutter_basic/app/data/remote/todo_paginated_response.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_basic/app/network/create_to_do.dart';
-import 'package:flutter_basic/app/network/delete_todo_item.dart';
-import 'package:flutter_basic/app/network/get_user_to_to_list.dart';
-import 'package:flutter_basic/app/network/update_to_do_item.dart';
+import 'package:flutter_basic/app/network/todo/create_to_do.dart';
+import 'package:flutter_basic/app/network/todo/delete_todo_item.dart';
+import 'package:flutter_basic/app/network/todo/get_user_to_to_list.dart';
+import 'package:flutter_basic/app/network/todo/update_to_do_item.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -18,12 +19,12 @@ class HomeController extends GetxController {
       TextEditingController();
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
-  RxList<Task> rxTaskList = RxList<Task>.empty(growable: true);
+  RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
   RxBool isOnTapped = false.obs;
   RxList<int> colors = RxList<int>.generate(12, (_) => 0);
 
   void resetColors() {
-    int len = rxTaskList.length;
+    int len = rxToDoList.length;
     colors.replaceRange(
         0, colors.length, List.generate(len, (index) => 0));
   }
@@ -44,7 +45,7 @@ class HomeController extends GetxController {
   }
 
   void createToDo() async {
-    Task? task = await createToDoItem(
+    ToDo? task = await createToDoItem(
       _preferenceManager.getInt(PreferenceManager.userId),
       createTaskTitleController.text,
       createTaskDescriptionController.text,
@@ -62,7 +63,7 @@ class HomeController extends GetxController {
   }
 
   void updateToDo(int taskId) async {
-    Task? task = await updateToDoItem(
+    ToDo? task = await updateToDoItem(
         taskId,
         createTaskTitleController.text,
         createTaskDescriptionController.text,
@@ -90,17 +91,17 @@ class HomeController extends GetxController {
   }
 
   void getToDoList() async {
-    List<Task> taskList = await getUserToDoList(_getUserIdFromPreference());
-    rxTaskList.clear();
-    rxTaskList.addAll(taskList);
-    profileController.countCompletedAndInCompletedToDos(taskList);
+    ToDoList toDoList = await getUserToDoList(1);
+    rxToDoList.clear();
+    rxToDoList.addAll(toDoList.results!);
+    profileController.countCompletedAndInCompletedToDos(toDoList.results!);
   }
 
   int _getUserIdFromPreference() {
     return _preferenceManager.getInt(PreferenceManager.userId);
   }
 
-  void setTextEditingControllerToUpdateToDoData(Task task) {
+  void setTextEditingControllerToUpdateToDoData(ToDo task) {
     createTaskTitleController.text = task.title!;
     createTaskDescriptionController.text = task.description!;
     createTaskStatusController.text = task.status!;

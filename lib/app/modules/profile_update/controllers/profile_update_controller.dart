@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/data/local/preference/preference_manager.dart';
-import 'package:flutter_basic/app/data/remote/profile.dart';
+import 'package:flutter_basic/app/data/models/profile.dart';
 import 'package:flutter_basic/app/log.dart';
-import 'package:flutter_basic/app/network/profile_username_update.dart';
+import 'package:flutter_basic/app/network/profile/profile_username_update.dart';
 import 'package:get/get.dart';
 
 class ProfileUpdateController extends GetxController {

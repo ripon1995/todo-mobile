@@ -1,4 +1,4 @@
-class Task {
+class ToDo {
   int? id;
   String? title;
   String? description;
@@ -7,7 +7,7 @@ class Task {
   bool? completed;
   int? user;
 
-  Task({
+  ToDo({
     this.id,
     this.title,
     this.description,
@@ -17,7 +17,7 @@ class Task {
     this.user,
   });
 
-  Task.fromJson(Map<String, dynamic> json) {
+  ToDo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];

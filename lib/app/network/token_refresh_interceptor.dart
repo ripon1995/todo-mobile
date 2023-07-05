@@ -4,7 +4,7 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/dio_request_retrier.dart';
 import 'package:flutter_basic/app/network/error_handlers.dart';
 import 'package:flutter_basic/app/network/exceptions/base_exception.dart';
-import 'package:flutter_basic/app/network/refresh_todo_token.dart';
+import 'package:flutter_basic/app/network/authentication/refresh_todo_token.dart';
 
 class TokenRefreshInterceptor extends InterceptorsWrapper {
   @override

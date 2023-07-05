@@ -1,5 +1,5 @@
 import 'package:flutter_basic/app/data/remote/registration_response.dart';
-import 'package:flutter_basic/app/network/registration.dart';
+import 'package:flutter_basic/app/network/authentication/registration.dart';
 import 'package:get/get.dart';
 
 class RegistrationController extends GetxController {

@@ -1,28 +1,31 @@
-import 'package:flutter_basic/app/data/models/task.dart';
+import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/network/api_call.dart';
 import 'package:flutter_basic/app/network/dio_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-Future<Task?> createToDoItem(int userId, String title, String description,
+Future<ToDo?> createToDoItem(int userId, String title, String description,
     String status, bool completed) async {
   try {
-    dynamic dioCall = DioProvider.plainDio.post(
+    dynamic dioCall = DioProvider.dioClient.post(
       "${dotenv.get("BASE_URL")}/todo/",
-      data: _requestBody(userId, title, description, status, completed),
+      data: _requestBody(title, description, status, completed),
     );
 
     return await callApiWithErrorParser(dioCall).then((dynamic response) {
-      return Task.fromJson(response.data);
+      return ToDo.fromJson(response.data);
     });
   } catch (exception) {
     rethrow;
   }
 }
 
-dynamic _requestBody(int userId, String title, String description,
-    String status, bool completed) {
+dynamic _requestBody(
+  String title,
+  String description,
+  String status,
+  bool completed,
+) {
   Map body = {
-    "user": userId,
     "title": title,
     "description": description,
     "status": status,
