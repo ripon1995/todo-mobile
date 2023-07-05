@@ -25,8 +25,7 @@ class HomeController extends GetxController {
 
   void resetColors() {
     int len = rxToDoList.length;
-    colors.replaceRange(
-        0, colors.length, List.generate(len, (index) => 0));
+    colors.replaceRange(0, colors.length, List.generate(len, (index) => 0));
   }
 
   @override
@@ -82,7 +81,7 @@ class HomeController extends GetxController {
     ToDoDeleteResponse? res = await deleteToDoItem(taskId);
     if (res!.message!.contains("success")) {
       Get.snackbar("Congratulations!", "Task deleted successfully!",
-          snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.red);
+          snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
     } else {
       Get.snackbar("Oops!", "Could not delete task",
           snackPosition: SnackPosition.BOTTOM);
@@ -91,10 +90,12 @@ class HomeController extends GetxController {
   }
 
   void getToDoList() async {
-    ToDoList toDoList = await getUserToDoList(1);
+    ToDoListPaginatedResponse toDoListPaginatedResponse =
+        await getUserToDoList(1);
     rxToDoList.clear();
-    rxToDoList.addAll(toDoList.results!);
-    profileController.countCompletedAndInCompletedToDos(toDoList.results!);
+    rxToDoList.addAll(toDoListPaginatedResponse.results!);
+    profileController
+        .countCompletedAndInCompletedToDos(toDoListPaginatedResponse.results!);
   }
 
   int _getUserIdFromPreference() {

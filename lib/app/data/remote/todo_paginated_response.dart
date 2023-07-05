@@ -1,19 +1,19 @@
 import 'package:flutter_basic/app/data/models/todo.dart';
 
-class ToDoList {
+class ToDoListPaginatedResponse {
   int? count;
   String? next;
   String? previous;
   List<ToDo>? results;
 
-  ToDoList({
+  ToDoListPaginatedResponse({
     this.count,
     this.next,
     this.previous,
     this.results,
   });
 
-  ToDoList.fromJson(Map<String, dynamic> json) {
+  ToDoListPaginatedResponse.fromJson(Map<String, dynamic> json) {
     count = json['count'];
     next = json['next'];
     previous = json['previous'];
