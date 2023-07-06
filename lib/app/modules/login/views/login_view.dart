@@ -88,7 +88,11 @@ class LoginView extends GetView<LoginController> {
       passwordController.text,
     );
     if (status == true) {
-      Get.snackbar("Congratulation", "Login successful");
+      Get.snackbar(
+        "Congratulation",
+        "Login successful",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       Get.toNamed(Routes.HOME);
     }
   }
