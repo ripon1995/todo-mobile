@@ -33,15 +33,23 @@ class HomeView extends GetView<HomeController> {
           () => ListView(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            children: List.generate(
-              controller.rxToDoList.length,
-              (index) => listItem(
-                context,
-                controller.rxToDoList[index],
-                controller,
-                index,
-              ),
-            ),
+            children: [
+              ...List.generate(
+                  controller.rxToDoList.length,
+                  (index) => listItem(
+                        context,
+                        controller.rxToDoList[index],
+                        controller,
+                        index,
+                      )),
+              if (controller.rxToDoListNext.isNotEmpty)
+                IconButton(
+                  onPressed: controller.getToDoList,
+                  icon: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                  ),
+                )
+            ],
           ),
         ),
       ),

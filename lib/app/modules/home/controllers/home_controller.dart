@@ -3,12 +3,12 @@ import 'package:flutter_basic/app/data/local/preference/preference_manager.dart'
 import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/data/remote/to_do_delete_response.dart';
 import 'package:flutter_basic/app/data/remote/todo_paginated_response.dart';
-import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/todo/create_to_do.dart';
 import 'package:flutter_basic/app/network/todo/delete_todo_item.dart';
 import 'package:flutter_basic/app/network/todo/get_user_to_to_list.dart';
 import 'package:flutter_basic/app/network/todo/update_to_do_item.dart';
+import 'package:flutter_basic/app/utils/constants.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
   RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
+  RxString rxToDoListNext = "".obs;
   RxBool isOnTapped = false.obs;
   RxList<int> colors = RxList<int>.generate(12, (_) => 0);
 
@@ -90,10 +91,18 @@ class HomeController extends GetxController {
   }
 
   void getToDoList() async {
+    int pageNumber = defaultPage;
+    if (rxToDoListNext.value.isNotEmpty) {
+      String pageNumberString = rxToDoListNext.value.split("page=")[1];
+      pageNumber = int.parse(pageNumberString);
+    }
     ToDoListPaginatedResponse toDoListPaginatedResponse =
-        await getUserToDoList(1);
-    rxToDoList.clear();
+        await getUserToDoList(pageNumber);
+    if (pageNumber == 1) {
+      rxToDoList.clear();
+    }
     rxToDoList.addAll(toDoListPaginatedResponse.results!);
+    rxToDoListNext.value = toDoListPaginatedResponse.next ?? "";
     profileController
         .countCompletedAndInCompletedToDos(toDoListPaginatedResponse.results!);
   }
