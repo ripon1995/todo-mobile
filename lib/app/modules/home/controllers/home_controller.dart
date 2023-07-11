@@ -4,6 +4,7 @@ import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/data/remote/to_do_delete_response.dart';
 import 'package:flutter_basic/app/data/remote/todo_paginated_response.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/network/profile/device_token_update.dart';
 import 'package:flutter_basic/app/network/todo/create_to_do.dart';
 import 'package:flutter_basic/app/network/todo/delete_todo_item.dart';
 import 'package:flutter_basic/app/network/todo/get_user_to_to_list.dart';
@@ -107,8 +108,17 @@ class HomeController extends GetxController {
         .countCompletedAndInCompletedToDos(toDoListPaginatedResponse.results!);
   }
 
+  void updateUserDeviceToken() async {
+    await deviceTokenUpdate(
+        _getUserIdFromPreference(), _getDeviceTokenFromPreference());
+  }
+
   int _getUserIdFromPreference() {
     return _preferenceManager.getInt(PreferenceManager.userId);
+  }
+
+  String _getDeviceTokenFromPreference() {
+    return _preferenceManager.getString(PreferenceManager.deviceToken);
   }
 
   void setTextEditingControllerToUpdateToDoData(ToDo task) {
