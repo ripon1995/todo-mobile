@@ -47,6 +47,7 @@ class ProfileView extends GetView<ProfileController> {
       width: MediaQuery.of(context).size.width * 1,
       child: Card(
         elevation: 8,
+        color: Colors.deepPurple[200],
         child: Stack(
           children: [
             Center(
@@ -55,11 +56,13 @@ class ProfileView extends GetView<ProfileController> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
-                        color: Colors.red),
-                    child: const Icon(
-                      Icons.person,
-                      size: 100,
-                    ),
+                        color: Colors.deepPurple),
+                    child: controller.rxImageUrl.isNotEmpty
+                        ? Obx(() => Image.network(controller.rxImageUrl.value))
+                        : const Icon(
+                            Icons.person,
+                            size: 100,
+                          ),
                   ),
                   Obx(
                     () => Text(
