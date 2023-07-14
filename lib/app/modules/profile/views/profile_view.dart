@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/modules/profile/widgets/logout_button.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
+import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -12,9 +13,12 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
         backgroundColor: Colors.deepPurple[200],
         body: Container(
-          margin: const EdgeInsets.only(left: 10, right: 10, top: 45),
+          margin: const EdgeInsets.only(left: 10, right: 10, top: 40),
           child: Column(
             children: [
+              const ReturnButton(
+                onTap: null,
+              ),
               _profile(context),
               const SizedBox(
                 height: 20,
