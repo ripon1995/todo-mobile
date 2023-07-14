@@ -4,6 +4,7 @@ class Profile {
   String? username;
   String? email;
   String? password;
+  String? deviceToken;
   List<String>? groups;
   List<String>? userPermissions;
 
@@ -13,6 +14,7 @@ class Profile {
     this.username,
     this.email,
     this.password,
+    this.deviceToken,
     this.groups,
     this.userPermissions,
   });
@@ -23,6 +25,7 @@ class Profile {
     username = json['username'];
     email = json['email'];
     password = json['password'];
+    deviceToken = json['device_token'];
     if (json['groups'] != null) {
       groups = <String>[];
       json['groups'].forEach((v) {
@@ -44,6 +47,7 @@ class Profile {
     data['username'] = username;
     data['email'] = email;
     data['password'] = password;
+    data['device_token'] = deviceToken;
     if (groups != null) {
       data['groups'] = groups!.map((v) => v).toList();
     }
