@@ -5,6 +5,9 @@ class Profile {
   String? email;
   String? password;
   String? deviceToken;
+  String? imageUrl;
+  String? firstName;
+  String? lastName;
   List<String>? groups;
   List<String>? userPermissions;
 
@@ -15,6 +18,9 @@ class Profile {
     this.email,
     this.password,
     this.deviceToken,
+    this.imageUrl,
+    this.firstName,
+    this.lastName,
     this.groups,
     this.userPermissions,
   });
@@ -26,6 +32,9 @@ class Profile {
     email = json['email'];
     password = json['password'];
     deviceToken = json['device_token'];
+    imageUrl = json['image_url'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     if (json['groups'] != null) {
       groups = <String>[];
       json['groups'].forEach((v) {
@@ -48,6 +57,9 @@ class Profile {
     data['email'] = email;
     data['password'] = password;
     data['device_token'] = deviceToken;
+    data['image_url'] = imageUrl;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
     if (groups != null) {
       data['groups'] = groups!.map((v) => v).toList();
     }
