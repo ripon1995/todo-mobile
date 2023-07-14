@@ -10,12 +10,9 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('ProfileView'),
-          centerTitle: true,
-        ),
+        backgroundColor: Colors.deepPurple[200],
         body: Container(
-          margin: const EdgeInsets.only(left: 10, right: 10),
+          margin: const EdgeInsets.only(left: 10, right: 10, top: 45),
           child: Column(
             children: [
               _profile(context),
@@ -45,49 +42,44 @@ class ProfileView extends GetView<ProfileController> {
   Widget _profile(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 1,
-      child: Card(
-        elevation: 8,
-        color: Colors.deepPurple[200],
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40),
-                        color: Colors.deepPurple),
-                    child: controller.rxImageUrl.isNotEmpty
-                        ? Obx(() => Image.network(controller.rxImageUrl.value))
-                        : const Icon(
-                            Icons.person,
-                            size: 100,
-                          ),
-                  ),
-                  Obx(
-                    () => Text(
-                      controller.username.value,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+      child: Stack(
+        children: [
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.red),
+                  child: controller.rxImageUrl.isNotEmpty
+                      ? Obx(() => Image.network(controller.rxImageUrl.value))
+                      : const Icon(
+                          Icons.person,
+                          size: 100,
+                        ),
+                ),
+                Obx(
+                  () => Text(
+                    controller.username.value,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: _profileUpdateButtonOnPressedAction,
-                icon: const Icon(Icons.edit),
-              ),
-            )
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: _profileUpdateButtonOnPressedAction,
+              icon: const Icon(Icons.edit),
+            ),
+          )
+        ],
       ),
     );
   }
