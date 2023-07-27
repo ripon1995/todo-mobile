@@ -15,6 +15,7 @@ class ProfileController extends GetxController {
   RxInt completedPercentage = 0.obs;
   RxInt inCompletedTotal = 0.obs;
   RxInt inCompletedPercentage = 0.obs;
+  RxString rxImageUrl = "".obs;
 
   @override
   void onInit() {
@@ -35,6 +36,7 @@ class ProfileController extends GetxController {
     Profile? profile = await getProfile();
     if (profile != null) {
       username.value = profile.username!;
+      rxImageUrl.value = profile.imageUrl!;
       _setProfileInfoInPreferenceManager(profile);
       Log.debug(profile.username!);
     }
@@ -45,6 +47,8 @@ class ProfileController extends GetxController {
     _preferenceManager.setInt(PreferenceManager.userId, profile!.id);
     _preferenceManager.setString(PreferenceManager.email, profile!.email);
     _preferenceManager.setString(PreferenceManager.password, profile!.password);
+    _preferenceManager.setString(
+        PreferenceManager.profilePictureLink, profile!.imageUrl);
   }
 
   void countCompletedAndInCompletedToDos(List<ToDo> taskList) {

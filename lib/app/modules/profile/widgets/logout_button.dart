@@ -10,11 +10,17 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _onPressedAction,
-      child: const Text(
-        'Logout',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Container(
+      width: 100,
+      decoration: BoxDecoration(
+        color: Colors.deepPurple[300],
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: IconButton(
+        onPressed: _onPressedAction,
+        icon: const Icon(Icons.logout_outlined),
+        iconSize: 30,
+        color: Colors.black,
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/modules/profile_update/widgets/input_decoration.dart';
+import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/profile_update/controllers/profile_update_controller.dart';
 
@@ -10,41 +12,91 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ProfileUpdateView'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: controller.usernameController,
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: controller.emailController,
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: controller.passwordController,
-              obscureText: true,
-            ),
-            const SizedBox(height: 16),
-            Obx(
-              () => controller.enableLoader.isFalse
-                  ? ElevatedButton(
-                      onPressed: () => _updateButtonOnPressedAction(context),
-                      child: const Text('Update'),
+      backgroundColor: Colors.deepPurple[200],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Align(
+                alignment: Alignment.topLeft,
+                child: ReturnButton(
+                  onTap: null,
+                ),
+              ),
+              const SizedBox(height: 30,),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple[700],
+                  controller: controller.usernameController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: inputDecoration(Icons.person_outline),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple[700],
+                  controller: controller.emailController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: inputDecoration(Icons.mail_outline),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple[700],
+                  controller: controller.passwordController,
+                  style: const TextStyle(color: Colors.white),
+                  obscureText: true,
+                  decoration: inputDecoration(Icons.password_outlined),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Obx(
+                () => controller.enableLoader.isFalse
+                    ? SizedBox(
+                  width: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepPurple[300],
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                          ),
+                          onPressed: () => _updateButtonOnPressedAction(context),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.update_outlined),
+                              SizedBox(width: 10,),
+                              Text('Update'),
+                            ],
+                          ),
+                        ),
                     )
-                  : const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.blue,
+                    : Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.deepPurple[300],
+                        ),
                       ),
-                    ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
