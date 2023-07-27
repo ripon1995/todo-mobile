@@ -71,13 +71,27 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
               const SizedBox(height: 16),
               Obx(
                 () => controller.enableLoader.isFalse
-                    ? ElevatedButton(
-                        onPressed: () => _updateButtonOnPressedAction(context),
-                        child: const Text('Update'),
-                      )
-                    : const Center(
+                    ? SizedBox(
+                  width: 50,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepPurple[300],
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+                          ),
+                          onPressed: () => _updateButtonOnPressedAction(context),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.update_outlined),
+                              SizedBox(width: 10,),
+                              Text('Update'),
+                            ],
+                          ),
+                        ),
+                    )
+                    : Center(
                         child: CircularProgressIndicator(
-                          color: Colors.blue,
+                          color: Colors.deepPurple[300],
                         ),
                       ),
               )
