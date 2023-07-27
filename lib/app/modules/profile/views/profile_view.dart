@@ -22,7 +22,7 @@ class ProfileView extends GetView<ProfileController> {
                   onTap: null,
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 250,
                 child: Card(
                   color: Colors.deepPurple[300],
@@ -45,6 +45,10 @@ class ProfileView extends GetView<ProfileController> {
                 height: 20,
               ),
               _profileTaskInfo(),
+              const SizedBox(
+                height: 20,
+              ),
+              _completedTaskWidget(),
               const SizedBox(
                 height: 20,
               ),
@@ -111,71 +115,160 @@ class ProfileView extends GetView<ProfileController> {
   }
 
   Widget _profileTaskInfo() {
-    const textStyle = TextStyle(color: Colors.black, fontSize: 16);
     return Row(
       children: [
-        Expanded(
-          flex: 1,
-          child: Card(
-            elevation: 8,
-            child: Container(
-              color: Colors.white10,
-              height: 150,
-              padding: const EdgeInsets.all(16),
-              child: Obx(() => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Completed",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Total : ${controller.completedTotal.value.toString()}',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const Text(
-                        'Percentage : ',
-                        style: textStyle,
-                      ),
-                    ],
-                  )),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Card(
-            elevation: 8,
-            child: Container(
-              color: Colors.white10,
-              height: 150,
-              padding: const EdgeInsets.all(16),
-              child: Obx(() => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Incompleted",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Total : ${controller.inCompletedTotal.value.toString()}',
-                        style: textStyle,
-                      ),
-                      const Text(
-                        'Percentage : ',
-                        style: textStyle,
-                      ),
-                    ],
-                  )),
-            ),
-          ),
-        ),
+        _newTaskWidget(),
+        _activeTaskWidget(),
       ],
+    );
+  }
+
+  Widget _newTaskWidget() {
+    const textStyle = TextStyle(color: Colors.black, fontSize: 16);
+    return Expanded(
+      flex: 1,
+      child: Card(
+        elevation: 8,
+        child: Container(
+          color: Colors.green,
+          height: 150,
+          padding: const EdgeInsets.all(16),
+          child: Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Text(
+                        "New Task",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.green[300],
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Icon(
+                          Icons.work_outline,
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
+                  ),
+                  Text(
+                    'Total : ${controller.completedTotal.value.toString()}',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const Text(
+                    'Percentage : ',
+                    style: textStyle,
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget _activeTaskWidget() {
+    const textStyle = TextStyle(color: Colors.black, fontSize: 16);
+    return Expanded(
+      flex: 1,
+      child: Card(
+        elevation: 8,
+        child: Container(
+          color: Colors.amberAccent,
+          height: 150,
+          padding: const EdgeInsets.all(16),
+          child: Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text(
+                        "Active",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: Colors.amberAccent[700],
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Icon(
+                          Icons.incomplete_circle_outlined,
+                          color: Colors.deepPurple,
+                        ),
+                      )
+                    ],
+                  ),
+                  Text(
+                    'Total : ${controller.inCompletedTotal.value.toString()}',
+                    style: textStyle,
+                  ),
+                  const Text(
+                    'Percentage : ',
+                    style: textStyle,
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget _completedTaskWidget() {
+    const textStyle = TextStyle(color: Colors.black, fontSize: 16);
+    return Card(
+      elevation: 5,
+      child: Container(
+        color: Colors.teal,
+        height: 150,
+        padding: const EdgeInsets.all(16),
+        child: Obx(() => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      "Completed",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.teal[300],
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Icon(
+                        Icons.badge_outlined,
+                        color: Colors.black,
+                      ),
+                    )
+                  ],
+                ),
+                Text(
+                  'Total : ${controller.completedTotal.value.toString()}',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+                const Text(
+                  'Rating : ',
+                  style: textStyle,
+                ),
+              ],
+            )),
+      ),
     );
   }
 
