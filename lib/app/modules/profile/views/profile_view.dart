@@ -49,13 +49,23 @@ class ProfileView extends GetView<ProfileController> {
       child: Stack(
         children: [
           Center(
-            child: Column(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.red),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.deepPurple[400],
+                  ),
                   child: controller.rxImageUrl.isNotEmpty
-                      ? Obx(() => Image.network(controller.rxImageUrl.value))
+                      ? Obx(() => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.network(
+                              controller.rxImageUrl.value,
+                              width: 150,
+                              height: 150,
+                            ),
+                          ))
                       : const Icon(
                           Icons.person,
                           size: 100,
@@ -67,6 +77,7 @@ class ProfileView extends GetView<ProfileController> {
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: Colors.amberAccent
                     ),
                   ),
                 ),
