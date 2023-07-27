@@ -16,8 +16,11 @@ class ProfileView extends GetView<ProfileController> {
           margin: const EdgeInsets.only(left: 10, right: 10, top: 40),
           child: Column(
             children: [
-              const ReturnButton(
-                onTap: null,
+              const Align(
+                alignment: Alignment.topLeft,
+                child: ReturnButton(
+                  onTap: null,
+                ),
               ),
               _profile(context),
               const SizedBox(
