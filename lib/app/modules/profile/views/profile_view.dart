@@ -78,9 +78,14 @@ class ProfileView extends GetView<ProfileController> {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: IconButton(
-              onPressed: _profileUpdateButtonOnPressedAction,
-              icon: const Icon(Icons.edit),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(15)),
+              child: IconButton(
+                onPressed: _profileUpdateButtonOnPressedAction,
+                icon: const Icon(Icons.edit),
+              ),
             ),
           )
         ],
