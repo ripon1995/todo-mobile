@@ -22,16 +22,24 @@ class ProfileView extends GetView<ProfileController> {
                   onTap: null,
                 ),
               ),
-              _profile(context),
+              Container(
+                height: 250,
+                child: Card(
+                  color: Colors.deepPurple[300],
+                  elevation: 5,
+                  child: _profile(context),
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
               const Text(
                 "Task Information",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.grey),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -78,10 +86,9 @@ class ProfileView extends GetView<ProfileController> {
                   () => Text(
                     controller.username.value,
                     style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amberAccent
-                    ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amberAccent),
                   ),
                 ),
                 const SizedBox(
@@ -92,14 +99,10 @@ class ProfileView extends GetView<ProfileController> {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple[300],
-                  borderRadius: BorderRadius.circular(15)),
-              child: IconButton(
-                onPressed: _profileUpdateButtonOnPressedAction,
-                icon: const Icon(Icons.edit),
-              ),
+            child: IconButton(
+              onPressed: _profileUpdateButtonOnPressedAction,
+              icon: const Icon(Icons.edit_outlined),
+              color: Colors.black,
             ),
           )
         ],
