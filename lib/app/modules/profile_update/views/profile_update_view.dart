@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
-import 'package:flutter_basic/app/modules/profile_update/widgets/input_decoration.dart';
+import 'package:flutter_basic/app/utils/input_decoration.dart';
 import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/profile_update/controllers/profile_update_controller.dart';
