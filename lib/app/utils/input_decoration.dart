@@ -59,3 +59,34 @@ InputDecoration inputDecorationLoginPage(IconData iconData, String hintText) {
     ),
   );
 }
+
+InputDecoration inputDecorationUpdateSheet(IconData iconData, String hintText) {
+  return InputDecoration(
+    contentPadding: const EdgeInsets.all(15),
+    prefixIcon: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.blueAccent[200],
+      ),
+      child: ColorFiltered(
+        colorFilter: const ColorFilter.mode(
+          Colors.white, // Replace this with the desired color
+          BlendMode.srcIn,
+        ),
+        child: Icon(iconData),
+      ),
+    ),
+    hintText: hintText,
+    hintStyle: const TextStyle(color: Colors.black26),
+    prefixIconColor: Colors.white,
+    prefixText: "   ",
+    enabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent),
+    ),
+    focusedBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.transparent,
+      ),
+    ),
+  );
+}
