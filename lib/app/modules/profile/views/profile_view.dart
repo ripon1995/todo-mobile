@@ -12,47 +12,53 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple[200],
-        body: Container(
-          margin: const EdgeInsets.only(left: 10, right: 10, top: 40),
-          child: Column(
+        body: SafeArea(
+          child: Stack(
             children: [
+              Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, top: 60),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 250,
+                      child: Card(
+                        color: Colors.deepPurple[300],
+                        elevation: 5,
+                        child: _profile(context),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Task Information",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _profileTaskInfo(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _completedTaskWidget(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    LogoutButton()
+                  ],
+                ),
+              ),
               const Align(
                 alignment: Alignment.topLeft,
                 child: ReturnButton(
                   onTap: null,
                 ),
               ),
-              SizedBox(
-                height: 250,
-                child: Card(
-                  color: Colors.deepPurple[300],
-                  elevation: 5,
-                  child: _profile(context),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Task Information",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              _profileTaskInfo(),
-              const SizedBox(
-                height: 20,
-              ),
-              _completedTaskWidget(),
-              const SizedBox(
-                height: 20,
-              ),
-              LogoutButton()
             ],
           ),
         ));

@@ -14,89 +14,93 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Align(
-                alignment: Alignment.topLeft,
-                child: ReturnButton(
-                  onTap: null,
-                ),
-              ),
-              const SizedBox(height: 30,),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  cursorColor: Colors.deepPurple[700],
-                  controller: controller.usernameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: inputDecoration(Icons.person_outline),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  cursorColor: Colors.deepPurple[700],
-                  controller: controller.emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: inputDecoration(Icons.mail_outline),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  cursorColor: Colors.deepPurple[700],
-                  controller: controller.passwordController,
-                  style: const TextStyle(color: Colors.white),
-                  obscureText: true,
-                  decoration: inputDecoration(Icons.password_outlined),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Obx(
-                () => controller.enableLoader.isFalse
-                    ? SizedBox(
-                  width: 50,
+        child: Stack(
+          children:[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 60,),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      cursorColor: Colors.deepPurple[700],
+                      controller: controller.usernameController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: inputDecoration(Icons.person_outline),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      cursorColor: Colors.deepPurple[700],
+                      controller: controller.emailController,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: inputDecoration(Icons.mail_outline),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      cursorColor: Colors.deepPurple[700],
+                      controller: controller.passwordController,
+                      style: const TextStyle(color: Colors.white),
+                      obscureText: true,
+                      decoration: inputDecoration(Icons.password_outlined),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Obx(
+                        () => controller.enableLoader.isFalse
+                        ? SizedBox(
+                      width: 50,
                       child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.deepPurple[300],
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                          ),
-                          onPressed: () => _updateButtonOnPressedAction(context),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Icon(Icons.update_outlined),
-                              SizedBox(width: 10,),
-                              Text('Update'),
-                            ],
-                          ),
                         ),
-                    )
-                    : Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.deepPurple[300],
+                        onPressed: () => _updateButtonOnPressedAction(context),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.update_outlined),
+                            SizedBox(width: 10,),
+                            Text('Update'),
+                          ],
                         ),
                       ),
-              )
-            ],
-          ),
+                    )
+                        : Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.deepPurple[300],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const Align(
+              alignment: Alignment.topLeft,
+              child: ReturnButton(
+                onTap: null,
+              ),
+            ),
+          ] ,
         ),
       ),
     );
