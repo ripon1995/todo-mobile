@@ -47,7 +47,7 @@ class HomeController extends GetxController {
       _preferenceManager.getInt(PreferenceManager.userId),
       createTaskTitleController.text,
       createTaskDescriptionController.text,
-      createTaskStatusController.text,
+      Status.New.name,
       createTaskIsCompleted.value,
     );
     if (task != null) {
@@ -129,18 +129,18 @@ class HomeController extends GetxController {
   }
 
   void _setStatusForUpdateTodoSheet(String status) {
-    if (status.contains("New")) {
+    if (status.contains(Status.New.name)) {
       handleStatusChange(Status.New);
-      rxStatusString("New");
-    } else if (status.contains("Active")) {
+      rxStatusString(Status.New.name);
+    } else if (status.contains(Status.Active.name)) {
       handleStatusChange(Status.Active);
-      rxStatusString("Active");
-    } else if (status.contains("Completed")) {
+      rxStatusString(Status.Active.name);
+    } else if (status.contains(Status.Completed.name)) {
       handleStatusChange(Status.Completed);
-      rxStatusString("Completed");
-    } else if (status.contains("Blocked")) {
+      rxStatusString(Status.Completed.name);
+    } else if (status.contains(Status.Blocked.name)) {
       handleStatusChange(Status.Blocked);
-      rxStatusString("Blocked");
+      rxStatusString(Status.Blocked.name);
     }
   }
 
