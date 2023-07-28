@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 class LoginView extends GetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class LoginView extends GetView<LoginController> {
                 onPressed: _loginButtonAction,
                 iconData: Icons.login_outlined,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
