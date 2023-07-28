@@ -33,22 +33,36 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                cursorColor: Colors.deepPurple[700],
-                controller: emailController,
-                decoration: inputDecorationLoginPage(
-                  Icons.mail_outline,
-                  "Email",
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple[700],
+                  controller: emailController,
+                  decoration: inputDecorationLoginPage(
+                    Icons.mail_outline,
+                    "Email",
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                cursorColor: Colors.deepPurple[700],
-                obscureText: true,
-                controller: passwordController,
-                decoration: inputDecorationLoginPage(
-                  Icons.password_outlined,
-                  "Password",
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextField(
+                  cursorColor: Colors.deepPurple[700],
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: inputDecorationLoginPage(
+                    Icons.password_outlined,
+                    "Password",
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

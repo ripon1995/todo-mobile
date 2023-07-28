@@ -36,29 +36,50 @@ class RegistrationView extends GetView<RegistrationController> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
-              TextFormField(
-                controller: usernameController,
-                decoration: inputDecorationLoginPage(
-                  Icons.person_outline,
-                  "username",
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextFormField(
+                  controller: usernameController,
+                  decoration: inputDecorationLoginPage(
+                    Icons.person_outline,
+                    "username",
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
-              TextFormField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: inputDecorationLoginPage(
-                  Icons.email_outlined,
-                  "email",
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextFormField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: inputDecorationLoginPage(
+                    Icons.email_outlined,
+                    "email",
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: inputDecorationLoginPage(
-                  Icons.password_outlined,
-                  "password",
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[300],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: inputDecorationLoginPage(
+                    Icons.password_outlined,
+                    "password",
+                  ),
                 ),
               ),
               const SizedBox(height: 32),
