@@ -23,12 +23,6 @@ class HomeController extends GetxController {
   RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
   RxString rxToDoListNext = "".obs;
   RxBool isOnTapped = false.obs;
-  RxList<int> colors = RxList<int>.generate(12, (_) => 0);
-
-  void resetColors() {
-    int len = rxToDoList.length;
-    colors.replaceRange(0, colors.length, List.generate(len, (index) => 0));
-  }
 
   @override
   void onInit() {
