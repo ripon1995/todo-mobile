@@ -10,6 +10,7 @@ import 'package:flutter_basic/app/network/todo/delete_todo_item.dart';
 import 'package:flutter_basic/app/network/todo/get_user_to_to_list.dart';
 import 'package:flutter_basic/app/network/todo/update_to_do_item.dart';
 import 'package:flutter_basic/app/utils/constants.dart';
+import 'package:flutter_basic/app/utils/enum_status.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -21,6 +22,7 @@ class HomeController extends GetxController {
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
   RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
+  Rx<Status> rxStatus = Rx<Status>(Status.newTask);
   RxString rxToDoListNext = "".obs;
   RxBool isOnTapped = false.obs;
 
@@ -120,5 +122,9 @@ class HomeController extends GetxController {
     createTaskDescriptionController.text = task.description!;
     createTaskStatusController.text = task.status!;
     createTaskIsCompleted.value = task.completed!;
+  }
+
+  void handleStatusChange(Status status) {
+    rxStatus.value = status;
   }
 }
