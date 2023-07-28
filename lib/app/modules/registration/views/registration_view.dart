@@ -27,13 +27,22 @@ class RegistrationView extends GetView<RegistrationController> {
                 child: ReturnButton(onTap: null),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Welcome to ToDo!',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Icon(
+                    Icons.list_alt,
+                    size: 40,
+                  ),
+                  Text(
+                    'Welcome to ToDo!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
               const SizedBox(height: 32),
               Container(

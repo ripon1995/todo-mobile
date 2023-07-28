@@ -22,15 +22,20 @@ class LoginView extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Welcome back!',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+              Row(
+                children: const [
+                  Icon(
+                    Icons.list_alt_outlined,
+                    size: 40,
                   ),
-                ),
+                  Text(
+                    'Welcome back!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Container(
