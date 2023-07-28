@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/data/local/preference/preference_manager.dart'
 import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/data/remote/to_do_delete_response.dart';
 import 'package:flutter_basic/app/data/remote/todo_paginated_response.dart';
+import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/profile/device_token_update.dart';
 import 'package:flutter_basic/app/network/todo/create_to_do.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_basic/app/network/todo/delete_todo_item.dart';
 import 'package:flutter_basic/app/network/todo/get_user_to_to_list.dart';
 import 'package:flutter_basic/app/network/todo/update_to_do_item.dart';
 import 'package:flutter_basic/app/utils/constants.dart';
+import 'package:flutter_basic/app/utils/enum_status.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -21,14 +23,9 @@ class HomeController extends GetxController {
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
   RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
+  Rx<Status> rxStatus = Rx<Status>(Status.New);
+  Rx<String> rxStatusString = "".obs;
   RxString rxToDoListNext = "".obs;
-  RxBool isOnTapped = false.obs;
-  RxList<int> colors = RxList<int>.generate(12, (_) => 0);
-
-  void resetColors() {
-    int len = rxToDoList.length;
-    colors.replaceRange(0, colors.length, List.generate(len, (index) => 0));
-  }
 
   @override
   void onInit() {
@@ -50,7 +47,7 @@ class HomeController extends GetxController {
       _preferenceManager.getInt(PreferenceManager.userId),
       createTaskTitleController.text,
       createTaskDescriptionController.text,
-      createTaskStatusController.text,
+      Status.New.name,
       createTaskIsCompleted.value,
     );
     if (task != null) {
@@ -65,11 +62,12 @@ class HomeController extends GetxController {
 
   void updateToDo(int taskId) async {
     ToDo? task = await updateToDoItem(
-        taskId,
-        createTaskTitleController.text,
-        createTaskDescriptionController.text,
-        createTaskStatusController.text,
-        createTaskIsCompleted.value);
+      taskId,
+      createTaskTitleController.text,
+      createTaskDescriptionController.text,
+      rxStatusString.value,
+      createTaskIsCompleted.value,
+    );
     if (task != null) {
       Get.snackbar("Congratulations!", "Task updated successfully!",
           snackPosition: SnackPosition.BOTTOM);
@@ -77,6 +75,7 @@ class HomeController extends GetxController {
       Get.snackbar("Oops!", "Could not update task",
           snackPosition: SnackPosition.BOTTOM);
     }
+    getToDoList();
   }
 
   void deleteToDo(int taskId) async {
@@ -124,7 +123,29 @@ class HomeController extends GetxController {
   void setTextEditingControllerToUpdateToDoData(ToDo task) {
     createTaskTitleController.text = task.title!;
     createTaskDescriptionController.text = task.description!;
-    createTaskStatusController.text = task.status!;
+    rxStatusString.value = task.status!;
+    _setStatusForUpdateTodoSheet(task.status!);
     createTaskIsCompleted.value = task.completed!;
+  }
+
+  void _setStatusForUpdateTodoSheet(String status) {
+    if (status.contains(Status.New.name)) {
+      handleStatusChange(Status.New);
+      rxStatusString(Status.New.name);
+    } else if (status.contains(Status.Active.name)) {
+      handleStatusChange(Status.Active);
+      rxStatusString(Status.Active.name);
+    } else if (status.contains(Status.Completed.name)) {
+      handleStatusChange(Status.Completed);
+      rxStatusString(Status.Completed.name);
+    } else if (status.contains(Status.Blocked.name)) {
+      handleStatusChange(Status.Blocked);
+      rxStatusString(Status.Blocked.name);
+    }
+  }
+
+  void handleStatusChange(Status status) {
+    rxStatus.value = status;
+    rxStatusString.value = status.name;
   }
 }

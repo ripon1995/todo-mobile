@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
+import 'package:flutter_basic/app/utils/input_decoration.dart';
 import 'package:get/get.dart';
 
-void createToBottomSheetContent(BuildContext context, HomeController controller) {
+void createToBottomSheetContent(
+    BuildContext context, HomeController controller) {
   showModalBottomSheet(
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(16.0),
+      ),
+    ),
     context: context,
     builder: (BuildContext context) {
       return Padding(
@@ -15,62 +20,60 @@ void createToBottomSheetContent(BuildContext context, HomeController controller)
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Text(
-                "Create New Task",
-                style: TextStyle(
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFA36DFA),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Text(
+                  "Create New Task",
+                  style: TextStyle(
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline),
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: controller.createTaskTitleController,
-              decoration: const InputDecoration(
-                labelText: "Title",
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[50],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: controller.createTaskTitleController,
+                  decoration:
+                      inputDecorationLoginPage(Icons.title_outlined, "title"),
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: controller.createTaskDescriptionController,
-              decoration: const InputDecoration(
-                labelText: "Description",
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[50],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: controller.createTaskDescriptionController,
+                  decoration: inputDecorationLoginPage(
+                      Icons.description_outlined, "description"),
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: controller.createTaskStatusController,
-              decoration: const InputDecoration(
-                labelText: "Status",
-              ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Obx(() => Radio<bool>(
-                      value: true,
-                      groupValue: controller.createTaskIsCompleted.value,
-                      onChanged: (bool? value) {
-                        controller.createTaskIsCompleted.value = value!;
-                      },
-                    )),
-                const Text("Completed"),
-                const SizedBox(width: 16),
-                Obx(() => Radio<bool>(
-                      value: false,
-                      groupValue: controller.createTaskIsCompleted.value,
-                      onChanged: (bool? value) {
-                        controller.createTaskIsCompleted.value = value!;
-                      },
-                    )),
-                const Text("Incompleted"),
-              ],
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
+            Center(
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple[300],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
                 onPressed: () => _createButtonAction(controller, context),
                 child: const Text(
                   "Create",

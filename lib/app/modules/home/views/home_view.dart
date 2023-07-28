@@ -16,10 +16,10 @@ class HomeView extends GetView<HomeController> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0),
+      backgroundColor: Colors.deepPurple[200],
       floatingActionButton: FloatingActionButton(
         onPressed: () => _floatingButtonAction(context),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.deepPurple[400],
         splashColor: Colors.green,
         child: const Icon(
           Icons.add,
@@ -27,35 +27,48 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-        actions: [_profileIcon()],
-      ),
-      body: SizedBox(
-        height: 120,
-        child: Obx(
-          () => ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              ...List.generate(
-                  controller.rxToDoList.length,
-                  (index) => listItem(
-                        context,
-                        controller.rxToDoList[index],
-                        controller,
-                        index,
-                      )),
-              if (controller.rxToDoListNext.isNotEmpty)
-                IconButton(
-                  onPressed: controller.getToDoList,
-                  icon: const Icon(
-                    Icons.arrow_forward_ios_rounded,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 50, left: 5),
+              child: Column(
+                children: [
+                  Obx(
+                    () => SizedBox(
+                      height: 120,
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          ...List.generate(
+                            controller.rxToDoList.length,
+                            (index) => listItem(
+                              context,
+                              controller.rxToDoList[index],
+                              controller,
+                              index,
+                            ),
+                          ),
+                          if (controller.rxToDoListNext.isNotEmpty)
+                            IconButton(
+                              onPressed: controller.getToDoList,
+                              icon: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                              ),
+                            )
+                        ],
+                      ),
+                    ),
                   ),
-                )
-            ],
-          ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: _profileIcon(),
+            ),
+          ],
         ),
       ),
     );
@@ -72,19 +85,20 @@ class HomeView extends GetView<HomeController> {
 
   Widget _profileIcon() {
     return Container(
-      margin: const EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 5),
       child: IconButton(
         onPressed: _profileButtonAction,
-        icon: const CircleAvatar(
-          backgroundColor: Colors.black,
-          child: Icon(
-            Icons.person,
+        icon: CircleAvatar(
+          backgroundColor: Colors.deepPurple[500],
+          child: const Icon(
+            Icons.person_outline,
             color: Colors.white,
           ),
         ),
       ),
     );
   }
+
   Future<void> _showNotificationPermissionDialog() async {
     await showDialog(
       context: Get.context!,
