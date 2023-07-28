@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0),
+      backgroundColor: Colors.deepPurple[200],
       floatingActionButton: FloatingActionButton(
         onPressed: () => _floatingButtonAction(context),
         backgroundColor: Colors.black,
@@ -27,35 +27,37 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-        actions: [_profileIcon()],
-      ),
-      body: SizedBox(
-        height: 120,
-        child: Obx(
-          () => ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: [
-              ...List.generate(
-                  controller.rxToDoList.length,
-                  (index) => listItem(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Obx(
+              () => SizedBox(
+                height: 120,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    ...List.generate(
+                      controller.rxToDoList.length,
+                      (index) => listItem(
                         context,
                         controller.rxToDoList[index],
                         controller,
                         index,
-                      )),
-              if (controller.rxToDoListNext.isNotEmpty)
-                IconButton(
-                  onPressed: controller.getToDoList,
-                  icon: const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                  ),
-                )
-            ],
-          ),
+                      ),
+                    ),
+                    if (controller.rxToDoListNext.isNotEmpty)
+                      IconButton(
+                        onPressed: controller.getToDoList,
+                        icon: const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                        ),
+                      )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -85,6 +87,7 @@ class HomeView extends GetView<HomeController> {
       ),
     );
   }
+
   Future<void> _showNotificationPermissionDialog() async {
     await showDialog(
       context: Get.context!,
