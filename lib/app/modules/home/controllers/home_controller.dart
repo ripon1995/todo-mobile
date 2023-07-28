@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/data/local/preference/preference_manager.dart'
 import 'package:flutter_basic/app/data/models/todo.dart';
 import 'package:flutter_basic/app/data/remote/to_do_delete_response.dart';
 import 'package:flutter_basic/app/data/remote/todo_paginated_response.dart';
+import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/network/profile/device_token_update.dart';
 import 'package:flutter_basic/app/network/todo/create_to_do.dart';
@@ -25,7 +26,6 @@ class HomeController extends GetxController {
   Rx<Status> rxStatus = Rx<Status>(Status.New);
   Rx<String> rxStatusString = "".obs;
   RxString rxToDoListNext = "".obs;
-  RxBool isOnTapped = false.obs;
 
   @override
   void onInit() {
@@ -75,6 +75,7 @@ class HomeController extends GetxController {
       Get.snackbar("Oops!", "Could not update task",
           snackPosition: SnackPosition.BOTTOM);
     }
+    getToDoList();
   }
 
   void deleteToDo(int taskId) async {
@@ -122,6 +123,7 @@ class HomeController extends GetxController {
   void setTextEditingControllerToUpdateToDoData(ToDo task) {
     createTaskTitleController.text = task.title!;
     createTaskDescriptionController.text = task.description!;
+    rxStatusString.value = task.status!;
     _setStatusForUpdateTodoSheet(task.status!);
     createTaskIsCompleted.value = task.completed!;
   }
@@ -144,5 +146,6 @@ class HomeController extends GetxController {
 
   void handleStatusChange(Status status) {
     rxStatus.value = status;
+    rxStatusString.value = status.name;
   }
 }
