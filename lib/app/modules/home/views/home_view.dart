@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
       backgroundColor: Colors.deepPurple[200],
       floatingActionButton: FloatingActionButton(
         onPressed: () => _floatingButtonAction(context),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.deepPurple[400],
         splashColor: Colors.green,
         child: const Icon(
           Icons.add,
