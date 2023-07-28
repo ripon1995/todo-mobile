@@ -3,10 +3,14 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
-void createToBottomSheetContent(BuildContext context, HomeController controller) {
+void createToBottomSheetContent(
+    BuildContext context, HomeController controller) {
   showModalBottomSheet(
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(16.0),
+      ),
+    ),
     context: context,
     builder: (BuildContext context) {
       return Padding(
@@ -15,13 +19,21 @@ void createToBottomSheetContent(BuildContext context, HomeController controller)
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Text(
-                "Create New Task",
-                style: TextStyle(
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFA36DFA),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Text(
+                  "Create New Task",
+                  style: TextStyle(
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline),
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 16),
