@@ -13,7 +13,7 @@ Widget listItem(
     },
     onLongPress: () {
       controller.setTextEditingControllerToUpdateToDoData(task);
-      _listItemOnLongPressedAction(context, controller, task.id!);
+      _listItemOnLongPressedAction(context, controller, task.id!, task.title!);
     },
     child: Container(
       decoration: BoxDecoration(
@@ -63,6 +63,6 @@ void _listItemOnTapAction(
 }
 
 void _listItemOnLongPressedAction(
-    BuildContext context, HomeController controller, int taskId) {
-  deleteToDoBottomSheetContent(context, controller, taskId);
+    BuildContext context, HomeController controller, int taskId, String title) {
+  deleteToDoBottomSheetContent(context, controller, taskId, title);
 }
