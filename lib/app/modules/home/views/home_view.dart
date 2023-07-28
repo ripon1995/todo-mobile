@@ -85,17 +85,14 @@ class HomeView extends GetView<HomeController> {
 
   Widget _profileIcon() {
     return Container(
-      margin: const EdgeInsets.only(right: 10),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IconButton(
-          onPressed: _profileButtonAction,
-          icon: CircleAvatar(
-            backgroundColor: Colors.deepPurple[500],
-            child: const Icon(
-              Icons.person_outline,
-              color: Colors.white,
-            ),
+      margin: const EdgeInsets.only(right: 5),
+      child: IconButton(
+        onPressed: _profileButtonAction,
+        icon: CircleAvatar(
+          backgroundColor: Colors.deepPurple[500],
+          child: const Icon(
+            Icons.person_outline,
+            color: Colors.white,
           ),
         ),
       ),
