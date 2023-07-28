@@ -1,1 +1,1 @@
-enum Status { newTask, active, completed, blocked }
+enum Status { New, Active, Completed, Blocked }

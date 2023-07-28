@@ -107,7 +107,7 @@ void updateToBottomSheetContent(
                       Expanded(
                         child: Obx(() => RadioListTile(
                           activeColor: Colors.white,
-                          value: Status.newTask,
+                          value: Status.New,
                           groupValue: controller.rxStatus.value,
                           onChanged: (status) {
                             if (status != null) {
@@ -124,7 +124,7 @@ void updateToBottomSheetContent(
                       Expanded(
                         child: Obx(() => RadioListTile(
                           activeColor: Colors.white,
-                          value: Status.active,
+                          value: Status.Active,
                           groupValue: controller.rxStatus.value,
                           onChanged: (status) {
                             if (status != null) {
@@ -146,7 +146,7 @@ void updateToBottomSheetContent(
                       Expanded(
                         child: Obx(() => RadioListTile(
                           activeColor: Colors.white,
-                          value: Status.completed,
+                          value: Status.Completed,
                           groupValue: controller.rxStatus.value,
                           onChanged: (status) {
                             if (status != null) {
@@ -163,7 +163,7 @@ void updateToBottomSheetContent(
                       Expanded(
                         child: Obx(() => RadioListTile(
                           activeColor: Colors.white,
-                          value: Status.blocked,
+                          value: Status.Blocked,
                           groupValue: controller.rxStatus.value,
                           onChanged: (status) {
                             if (status != null) {

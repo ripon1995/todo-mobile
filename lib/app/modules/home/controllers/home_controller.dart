@@ -22,7 +22,8 @@ class HomeController extends GetxController {
   TextEditingController createTaskStatusController = TextEditingController();
   RxBool createTaskIsCompleted = false.obs;
   RxList<ToDo> rxToDoList = RxList<ToDo>.empty(growable: true);
-  Rx<Status> rxStatus = Rx<Status>(Status.newTask);
+  Rx<Status> rxStatus = Rx<Status>(Status.New);
+  Rx<String> rxStatusString = "".obs;
   RxString rxToDoListNext = "".obs;
   RxBool isOnTapped = false.obs;
 
@@ -61,11 +62,12 @@ class HomeController extends GetxController {
 
   void updateToDo(int taskId) async {
     ToDo? task = await updateToDoItem(
-        taskId,
-        createTaskTitleController.text,
-        createTaskDescriptionController.text,
-        createTaskStatusController.text,
-        createTaskIsCompleted.value);
+      taskId,
+      createTaskTitleController.text,
+      createTaskDescriptionController.text,
+      rxStatusString.value,
+      createTaskIsCompleted.value,
+    );
     if (task != null) {
       Get.snackbar("Congratulations!", "Task updated successfully!",
           snackPosition: SnackPosition.BOTTOM);
@@ -120,8 +122,24 @@ class HomeController extends GetxController {
   void setTextEditingControllerToUpdateToDoData(ToDo task) {
     createTaskTitleController.text = task.title!;
     createTaskDescriptionController.text = task.description!;
-    createTaskStatusController.text = task.status!;
+    _setStatusForUpdateTodoSheet(task.status!);
     createTaskIsCompleted.value = task.completed!;
+  }
+
+  void _setStatusForUpdateTodoSheet(String status) {
+    if (status.contains("New")) {
+      handleStatusChange(Status.New);
+      rxStatusString("New");
+    } else if (status.contains("Active")) {
+      handleStatusChange(Status.Active);
+      rxStatusString("Active");
+    } else if (status.contains("Completed")) {
+      handleStatusChange(Status.Completed);
+      rxStatusString("Completed");
+    } else if (status.contains("Blocked")) {
+      handleStatusChange(Status.Blocked);
+      rxStatusString("Blocked");
+    }
   }
 
   void handleStatusChange(Status status) {
