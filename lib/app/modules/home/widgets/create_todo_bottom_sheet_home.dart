@@ -48,7 +48,7 @@ void createToBottomSheetContent(
                 child: TextField(
                   controller: controller.createTaskTitleController,
                   decoration:
-                      inputDecorationLoginPage(Icons.task_outlined, "title"),
+                      inputDecorationLoginPage(Icons.title_outlined, "title"),
                 ),
               ),
             ),
