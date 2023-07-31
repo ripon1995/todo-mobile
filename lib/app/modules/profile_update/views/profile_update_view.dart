@@ -15,13 +15,26 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
       backgroundColor: Colors.deepPurple[200],
       body: SafeArea(
         child: Stack(
-          children:[
+          children: [
+            ClipPath(
+              clipper: CustomClip(),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[400],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 500,
+                width: double.infinity,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 60,),
+                  const SizedBox(
+                    height: 60,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -66,30 +79,33 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
                   ),
                   const SizedBox(height: 16),
                   Obx(
-                        () => controller.enableLoader.isFalse
+                    () => controller.enableLoader.isFalse
                         ? SizedBox(
-                      width: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple[300],
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                        ),
-                        onPressed: () => _updateButtonOnPressedAction(context),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(Icons.update_outlined),
-                            SizedBox(width: 10,),
-                            Text('Update'),
-                          ],
-                        ),
-                      ),
-                    )
+                            width: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepPurple[300],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                              onPressed: () =>
+                                  _updateButtonOnPressedAction(context),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.update_outlined),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('Update'),
+                                ],
+                              ),
+                            ),
+                          )
                         : Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.deepPurple[300],
-                      ),
-                    ),
+                            child: CircularProgressIndicator(
+                              color: Colors.deepPurple[300],
+                            ),
+                          ),
                   )
                 ],
               ),
@@ -100,7 +116,7 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
                 onTap: null,
               ),
             ),
-          ] ,
+          ],
         ),
       ),
     );
@@ -121,5 +137,25 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
               () => Get.snackbar("Congratulations!", "Update successful"))
           .whenComplete(() => Navigator.of(context).pop());
     }
+  }
+}
+
+class CustomClip extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    double h = size.height;
+    double w = size.width;
+    Path path = Path();
+    path.lineTo(0, h);
+    path.quadraticBezierTo(w * .25, h * .5, w * .5, h * .75);
+    path.quadraticBezierTo(w * .75, h, w, h * .5);
+    path.lineTo(w, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
