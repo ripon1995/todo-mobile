@@ -13,21 +13,21 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-      body: SafeArea(
-        child: Stack(
-          children: [
-            ClipPath(
-              clipper: CustomClip(),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple[400],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                height: 500,
-                width: double.infinity,
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: CustomClip(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[400],
+                borderRadius: BorderRadius.circular(10),
               ),
+              height: 500,
+              width: double.infinity,
             ),
-            Padding(
+          ),
+          SafeArea(
+            child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -110,14 +110,16 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
                 ],
               ),
             ),
-            const Align(
+          ),
+          const SafeArea(
+            child: Align(
               alignment: Alignment.topLeft,
               child: ReturnButton(
                 onTap: null,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
