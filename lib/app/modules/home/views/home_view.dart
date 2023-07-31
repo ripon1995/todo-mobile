@@ -103,7 +103,7 @@ class HomeView extends GetView<HomeController> {
       child: IconButton(
         onPressed: _profileButtonAction,
         icon: CircleAvatar(
-          backgroundColor: Colors.deepPurple[500],
+          backgroundColor: Colors.deepPurple[400],
           child: const Icon(
             Icons.person_outline,
             color: Colors.white,
