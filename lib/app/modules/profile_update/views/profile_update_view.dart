@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
+import 'package:flutter_basic/app/utils/custom_clip_path.dart';
 import 'package:flutter_basic/app/utils/input_decoration.dart';
 import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
@@ -13,15 +13,28 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-      body: SafeArea(
-        child: Stack(
-          children:[
-            Padding(
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: CustomClip(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[400],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 500,
+              width: double.infinity,
+            ),
+          ),
+          SafeArea(
+            child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 60,),
+                  const SizedBox(
+                    height: 60,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -66,42 +79,47 @@ class ProfileUpdateView extends GetView<ProfileUpdateController> {
                   ),
                   const SizedBox(height: 16),
                   Obx(
-                        () => controller.enableLoader.isFalse
+                    () => controller.enableLoader.isFalse
                         ? SizedBox(
-                      width: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple[300],
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-                        ),
-                        onPressed: () => _updateButtonOnPressedAction(context),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(Icons.update_outlined),
-                            SizedBox(width: 10,),
-                            Text('Update'),
-                          ],
-                        ),
-                      ),
-                    )
+                            width: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepPurple[300],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                              onPressed: () =>
+                                  _updateButtonOnPressedAction(context),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.update_outlined),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text('Update'),
+                                ],
+                              ),
+                            ),
+                          )
                         : Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.deepPurple[300],
-                      ),
-                    ),
+                            child: CircularProgressIndicator(
+                              color: Colors.deepPurple[300],
+                            ),
+                          ),
                   )
                 ],
               ),
             ),
-            const Align(
+          ),
+          const SafeArea(
+            child: Align(
               alignment: Alignment.topLeft,
               child: ReturnButton(
                 onTap: null,
               ),
             ),
-          ] ,
-        ),
+          ),
+        ],
       ),
     );
   }

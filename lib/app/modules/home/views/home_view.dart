@@ -3,6 +3,7 @@ import 'package:flutter_basic/app/modules/home/controllers/home_controller.dart'
 import 'package:flutter_basic/app/modules/home/widgets/create_todo_bottom_sheet_home.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
 import 'package:flutter_basic/app/services/notification_permission_dialogue.dart';
+import 'package:flutter_basic/app/utils/custom_clip_path.dart';
 import 'package:get/get.dart';
 import 'package:flutter_basic/app/modules/home/widgets/todo_item_card.dart';
 
@@ -27,10 +28,21 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: CustomClip(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[500],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 500,
+              width: double.infinity,
+            ),
+          ),
+          SafeArea(
+            child: Container(
               margin: const EdgeInsets.only(top: 50, left: 5),
               child: Column(
                 children: [
@@ -64,12 +76,14 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
             ),
-            Align(
+          ),
+          SafeArea(
+            child: Align(
               alignment: Alignment.topRight,
               child: _profileIcon(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -89,7 +103,7 @@ class HomeView extends GetView<HomeController> {
       child: IconButton(
         onPressed: _profileButtonAction,
         icon: CircleAvatar(
-          backgroundColor: Colors.deepPurple[500],
+          backgroundColor: Colors.deepPurple[400],
           child: const Icon(
             Icons.person_outline,
             color: Colors.white,

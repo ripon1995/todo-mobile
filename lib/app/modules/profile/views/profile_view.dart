@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/modules/profile/widgets/logout_button.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
+import 'package:flutter_basic/app/utils/custom_clip_path.dart';
 import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
 
@@ -12,20 +13,28 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.deepPurple[200],
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Container(
+        body: Stack(
+          children: [
+            ClipPath(
+              clipper: CustomClip(),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[500],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 500,
+                width: double.infinity,
+              ),
+            ),
+            SafeArea(
+              child: Container(
                 margin: const EdgeInsets.only(left: 10, right: 10, top: 60),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 250,
-                      child: Card(
-                        color: Colors.deepPurple[300],
-                        elevation: 5,
-                        child: _profile(context),
-                      ),
+                    Card(
+                      color: Colors.deepPurple[300],
+                      elevation: 5,
+                      child: _profile(context),
                     ),
                     const SizedBox(
                       height: 20,
@@ -53,14 +62,16 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
               ),
-              const Align(
+            ),
+            const SafeArea(
+              child: Align(
                 alignment: Alignment.topLeft,
                 child: ReturnButton(
                   onTap: null,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 

@@ -27,7 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Icon(
               iconData,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           Padding(
@@ -35,9 +35,10 @@ class CustomElevatedButton extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
