@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic/app/modules/profile/controllers/profile_controller.dart';
 import 'package:flutter_basic/app/modules/profile/widgets/logout_button.dart';
 import 'package:flutter_basic/app/routes/app_pages.dart';
+import 'package:flutter_basic/app/utils/custom_clip_path.dart';
 import 'package:flutter_basic/app/utils/return_button.dart';
 import 'package:get/get.dart';
 
@@ -19,12 +20,15 @@ class ProfileView extends GetView<ProfileController> {
                 margin: const EdgeInsets.only(left: 10, right: 10, top: 60),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 250,
-                      child: Card(
-                        color: Colors.deepPurple[300],
-                        elevation: 5,
-                        child: _profile(context),
+                    ClipPath(
+                      clipper: CustomClipPath(),
+                      child: SizedBox(
+                        height: 250,
+                        child: Card(
+                          color: Colors.deepPurple[300],
+                          elevation: 5,
+                          child: _profile(context),
+                        ),
                       ),
                     ),
                     const SizedBox(
