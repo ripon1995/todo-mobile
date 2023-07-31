@@ -17,111 +17,113 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Stack(
-            children: [
-              ClipPath(
-                clipper: CustomClipPath(),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.deepPurple[500],
-                  ),
-                  height: 200,
-                  width: double.infinity,
-                ),
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: CustomClip(),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.deepPurple[500],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.list_alt_outlined,
-                        size: 40,
-                      ),
-                      Text(
-                        'Welcome back!',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[300],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextField(
-                      cursorColor: Colors.deepPurple[700],
-                      controller: emailController,
-                      decoration: inputDecorationLoginPage(
-                        Icons.mail_outline,
-                        "Email",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.deepPurple[300],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextField(
-                      cursorColor: Colors.deepPurple[700],
-                      obscureText: true,
-                      controller: passwordController,
-                      decoration: inputDecorationLoginPage(
-                        Icons.password_outlined,
-                        "Password",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  CustomElevatedButton(
-                    text: "Login",
-                    onPressed: _loginButtonAction,
-                    iconData: Icons.login_outlined,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Don't have an account? ",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      GestureDetector(
-                        onTap: () => _registerButtonAction(),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple[300],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Text(
-                            'Register',
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.black87),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ],
+              height: 500,
+              width: double.infinity,
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: const [
+                    Icon(
+                      Icons.list_alt_outlined,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Welcome back!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple[300],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: TextField(
+                    style: const TextStyle(color: Colors.white),
+                    cursorColor: Colors.deepPurple[700],
+                    controller: emailController,
+                    decoration: inputDecorationLoginPage(
+                      Icons.mail_outline,
+                      "Email",
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple[300],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: TextField(
+                    style: const TextStyle(color: Colors.white),
+                    cursorColor: Colors.deepPurple[700],
+                    obscureText: true,
+                    controller: passwordController,
+                    decoration: inputDecorationLoginPage(
+                      Icons.password_outlined,
+                      "Password",
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                CustomElevatedButton(
+                  text: "Login",
+                  onPressed: _loginButtonAction,
+                  iconData: Icons.login_outlined,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account? ",
+                      style: TextStyle(fontSize: 16,color: Colors.white,),
+                    ),
+                    GestureDetector(
+                      onTap: () => _registerButtonAction(),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple[300],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text(
+                          'Register',
+                          style:
+                          TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

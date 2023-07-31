@@ -17,104 +17,110 @@ class RegistrationView extends GetView<RegistrationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurple[200],
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Stack(
-            children: [
-              ClipPath(
-                clipper: CustomClipPath(),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.deepPurple[500],
-                  ),
-                  height: 150,
-                  width: double.infinity,
-                ),
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: CustomClip(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[500],
+                borderRadius: BorderRadius.circular(10),
               ),
-              Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: ReturnButton(onTap: null),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Icon(
-                      Icons.list_alt,
-                      size: 40,
-                    ),
-                    Text(
-                      'Welcome to ToDo!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextFormField(
-                    controller: usernameController,
-                    decoration: inputDecorationLoginPage(
-                      Icons.person_outline,
-                      "username",
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextFormField(
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: inputDecorationLoginPage(
-                      Icons.email_outlined,
-                      "email",
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.deepPurple[300],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: inputDecorationLoginPage(
-                      Icons.password_outlined,
-                      "password",
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 32),
-                CustomElevatedButton(
-                  text: "Register",
-                  onPressed: _registerButtonAction,
-                  iconData: Icons.app_registration_outlined,
-                )
-              ],
-            ),],
+              height: 500,
+              width: double.infinity,
+            ),
           ),
-        ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: ReturnButton(onTap: null),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.list_alt,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        'Welcome to ToDo!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: TextFormField(
+                      style: const TextStyle(color: Colors.white),
+                      controller: usernameController,
+                      decoration: inputDecorationLoginPage(
+                        Icons.person_outline,
+                        "username",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: TextFormField(
+                      style: const TextStyle(color: Colors.white),
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: inputDecorationLoginPage(
+                        Icons.email_outlined,
+                        "email",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[300],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: TextFormField(
+                      style: const TextStyle(color: Colors.white),
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: inputDecorationLoginPage(
+                        Icons.password_outlined,
+                        "password",
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  CustomElevatedButton(
+                    text: "Register",
+                    onPressed: _registerButtonAction,
+                    iconData: Icons.app_registration_outlined,
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
