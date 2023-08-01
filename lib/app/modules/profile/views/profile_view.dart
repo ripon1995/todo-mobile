@@ -84,24 +84,44 @@ class ProfileView extends GetView<ProfileController> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.deepPurple[400],
-                  ),
-                  child: controller.rxImageUrl.isNotEmpty
-                      ? Obx(() => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                              controller.rxImageUrl.value,
-                              width: 150,
-                              height: 150,
+                Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.deepPurple[400],
+                      ),
+                      child: controller.rxImageUrl.isNotEmpty
+                          ? Obx(() => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.network(
+                                  controller.rxImageUrl.value,
+                                  width: 150,
+                                  height: 150,
+                                ),
+                              ))
+                          : const Icon(
+                              Icons.person,
+                              size: 100,
                             ),
-                          ))
-                      : const Icon(
-                          Icons.person,
-                          size: 100,
-                        ),
+                    ),
+                    Positioned(
+                        bottom: 5,
+                        right: 20,
+                        child: GestureDetector(
+                          onTap: _uploadProfileImage,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurple[200],
+                                borderRadius: BorderRadius.circular(10)),
+                            padding: const EdgeInsets.all(2),
+                            child: const Icon(
+                              Icons.file_upload_outlined,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ))
+                  ],
                 ),
                 Obx(
                   () => Text(
@@ -293,4 +313,6 @@ class ProfileView extends GetView<ProfileController> {
     controller.profileUpdateController.updateVariable();
     Get.toNamed(Routes.PROFILE_UPDATE);
   }
+
+  void _uploadProfileImage() {}
 }
