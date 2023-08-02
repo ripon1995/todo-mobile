@@ -108,22 +108,37 @@ class ProfileView extends GetView<ProfileController> {
                               size: 100,
                             ),
                     ),
-                    Positioned(
-                        bottom: 5,
-                        right: 20,
-                        child: GestureDetector(
-                          onTap: _uploadProfileImage,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.deepPurple[200],
-                                borderRadius: BorderRadius.circular(10)),
-                            padding: const EdgeInsets.all(2),
-                            child: const Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ))
+                    Obx(() => Positioned(
+                          bottom: 5,
+                          right: 20,
+                          child: controller.showLoader.isFalse
+                              ? GestureDetector(
+                                  onTap: _uploadProfileImage,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepPurple[200],
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    padding: const EdgeInsets.all(2),
+                                    child: const Icon(
+                                      Icons.camera_alt_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  height: 25,
+                                  width: 25,
+                                  decoration: BoxDecoration(
+                                      color: Colors.deepPurple[200],
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: const EdgeInsets.all(2),
+                                  child: const CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 3,
+                                  ),
+                                ),
+                        )),
                   ],
                 ),
                 Obx(

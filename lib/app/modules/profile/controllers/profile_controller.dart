@@ -19,6 +19,7 @@ class ProfileController extends GetxController {
   RxInt inCompletedTotal = 0.obs;
   RxInt inCompletedPercentage = 0.obs;
   RxString rxImageUrl = "".obs;
+  RxBool showLoader = false.obs;
 
   @override
   void onInit() {
@@ -66,6 +67,7 @@ class ProfileController extends GetxController {
   }
 
   void uploadImageInFirebase(XFile file) async {
+    showLoader.value = true;
     final storageRef = FirebaseStorage.instance;
     dynamic folderRef = storageRef.ref().child(username.value);
     const String fileName = "profileImage.jpg";
@@ -75,6 +77,7 @@ class ProfileController extends GetxController {
     if (imageDownloadUrl.isNotEmpty) {
       rxImageUrl.value = imageDownloadUrl;
     }
+    showLoader.value = false;
   }
 
   Future<void> selectImageFromGallery() async {
