@@ -85,8 +85,9 @@ class ProfileController extends GetxController {
     try {
       final XFile? image =
           await ImagePicker().pickImage(source: ImageSource.gallery);
-      Log.debug(image!.path.toString());
-      uploadImageInFirebase(image);
+      if(image != null) {
+        uploadImageInFirebase(image);
+      }
     } catch (exception) {
       Log.debug(exception.toString());
     }
