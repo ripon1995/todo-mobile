@@ -5,6 +5,8 @@ import 'package:flutter_basic/app/log.dart';
 import 'package:flutter_basic/app/network/profile/profile_username_update.dart';
 import 'package:get/get.dart';
 
+import '../../../network/profile/profile_image_update.dart';
+
 class ProfileUpdateController extends GetxController {
   final PreferenceManager _preferenceManager = Get.find();
   RxBool enableLoader = false.obs;
@@ -42,6 +44,22 @@ class ProfileUpdateController extends GetxController {
     Profile? profile = await updateProfileUsername(
       _preferenceManager.getInt(PreferenceManager.userId),
       usernameController.text,
+    );
+
+    if (profile != null) {
+      _updateProfileInfoInPreferenceManager(profile);
+      enableLoader.value = false;
+      return true;
+    }
+    enableLoader.value = false;
+    return false;
+  }
+
+  Future<bool> updateProfilePicture(String imagePath) async {
+    enableLoader.value = true;
+    Profile? profile = await updateProfileImage(
+      _preferenceManager.getInt(PreferenceManager.userId),
+      imagePath,
     );
 
     if (profile != null) {

@@ -76,6 +76,7 @@ class ProfileController extends GetxController {
     final String imageDownloadUrl = await imageRef.getDownloadURL();
     if (imageDownloadUrl.isNotEmpty) {
       rxImageUrl.value = imageDownloadUrl;
+      profileUpdateController.updateProfilePicture(rxImageUrl.value);
     }
     showLoader.value = false;
   }
