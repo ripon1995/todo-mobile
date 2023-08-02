@@ -93,11 +93,14 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       child: controller.rxImageUrl.isNotEmpty
                           ? Obx(() => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.network(
-                                  controller.rxImageUrl.value,
-                                  width: 150,
-                                  height: 150,
+                                padding: const EdgeInsets.all(2.0),
+                                child: ClipOval(
+                                  child: Image.network(
+                                    controller.rxImageUrl.value,
+                                    width: 150,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ))
                           : const Icon(
@@ -116,7 +119,7 @@ class ProfileView extends GetView<ProfileController> {
                                 borderRadius: BorderRadius.circular(10)),
                             padding: const EdgeInsets.all(2),
                             child: const Icon(
-                              Icons.file_upload_outlined,
+                              Icons.camera_alt_outlined,
                               color: Colors.white,
                             ),
                           ),
@@ -314,5 +317,7 @@ class ProfileView extends GetView<ProfileController> {
     Get.toNamed(Routes.PROFILE_UPDATE);
   }
 
-  void _uploadProfileImage() {}
+  void _uploadProfileImage() {
+    controller.selectImageFromGallery();
+  }
 }
